@@ -71,7 +71,7 @@
                     <div class="flex flex-col w-full lg:w-1/2 md:ml-16 items-center md:items-start px-6 tracking-wide">
                         <p class="text-white text-5xl my-4">WELCOME TO KATERINGKU</p>
                         <a class="text-xl inline-block no-underline border-b border-gray-600 leading-relaxed hover:text-black hover:border-black"
-                            href="/restaurant">View Catering</a>
+                            href="/signin">Sign in</a>
                     </div>
                 </div>
 
@@ -86,11 +86,10 @@
         <input class="carousel-open" type="radio" id="carousel-2" name="carousel" aria-hidden="true" hidden="">
         <div class="carousel-item absolute opacity-0 bg-cover bg-right" style="height:91vh;">
             <div class="block h-full w-full mx-auto flex pt-6 md:pt-0 md:items-center bg-cover bg-right"
-                style="background-image: url('https://images.unsplash.com/photo-1533090161767-e6ffed986c88?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjM0MTM2fQ&auto=format&fit=crop&w=1600&q=80');">
-
+            style="background-image: url('{{ asset('images/home2.png') }}');">
                 <div class="container mx-auto">
                     <div class="flex flex-col w-full lg:w-1/2 md:ml-16 items-center md:items-start px-6 tracking-wide">
-                        <p class="text-black text-2xl my-4">Real Bamboo Wall Clock</p>
+                        <p class="text-white text-2xl my-4">The Best Food, That You Must Try</p>
                         <a class="text-xl inline-block no-underline border-b border-gray-600 leading-relaxed hover:text-black hover:border-black"
                             href="#">view product</a>
                     </div>
@@ -107,11 +106,10 @@
         <input class="carousel-open" type="radio" id="carousel-3" name="carousel" aria-hidden="true" hidden="">
         <div class="carousel-item absolute opacity-0"style="height:91vh;">
             <div class="block h-full w-full mx-auto flex pt-6 md:pt-0 md:items-center bg-cover bg-bottom"
-                style="background-image: url('https://images.unsplash.com/photo-1519327232521-1ea2c736d34d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1600&q=80');">
-
+            style="background-image: url('{{ asset('images/home3.png') }}');">
                 <div class="container mx-auto">
                     <div class="flex flex-col w-full lg:w-1/2 md:ml-16 items-center md:items-start px-6 tracking-wide">
-                        <p class="text-black text-2xl my-4">Brown and blue hardbound book</p>
+                        <p class="text-white text-2xl my-4">Enjoy Our Menu</p>
                         <a class="text-xl inline-block no-underline border-b border-gray-600 leading-relaxed hover:text-black hover:border-black"
                             href="#">view product</a>
                     </div>

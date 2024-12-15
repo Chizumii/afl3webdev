@@ -54,173 +54,92 @@
             color: #000;
         }
     </style>
-
 </head>
-
 <body>
-
     <x-layout>
-        <x-slot:layoutTitle>{{ $pagetitle }}</x-slot:layoutTitle>
-        <div class="text-gray-800 text-lg font-bold text-left ml-24  my-4">
+        <x-slot:layoutTitle>{{ $pagetitle}}</x-slot:layoutTitle>
+        <div class="text-gray-800 text-lg font-bold text-left ml-24 my-4">
             <label for="current-date" class="block mb-2">Pilih Tanggal:</label>
             <input type="date" id="current-date" name="current-date" class="border border-gray-400 rounded p-2"
-                min="2024-12-14" />
+                min="{{ now()->format('Y-m-d') }}" />
         </div>
-
         <section class="bg-white py-8">
-            <div class="container mx-auto flex items-center flex-wrap pt-4 pb-12">
-                <nav id="store" class="w-full z-30 top-0 px-6 py-1">
-                    <div class="w-full container mx-auto flex flex-wrap items-center mt-0 px-2 py-3">
-                        <a class="uppercase tracking-wide no-underline hover:no-underline font-bold text-gray-800 text-xl "
-                            href="#">
-                            Restaurant 1
-                        </a>
-                        <a class="ml-4 uppercase tracking-wide no-underline hover:underline font-bold text-gray-800 text-xl border-2 border-gray-800 py-2 px-4 rounded"
-                            href="#">
-                            Add to cart
-                        </a>
-
-                        <div class="flex items-center" id="store-nav-content">
-                            <a class="pl-3 inline-block no-underline hover:text-black" href="#">
+            <div class="container mx-auto flex flex-wrap pt-4 pb-12">
+                <?php
+                $restaurants = collect([
+                    (object)[
+                        'name' => 'Restoran Padang Sederhana',
+                        'menus' => collect([
+                            (object)[
+                                'name' => 'Rendang',
+                                'description' => 'Daging sapi dimasak dengan bumbu kaya rempah.',
+                                'image' => 'rendang.jpg',
+                            ],
+                            (object)[
+                                'name' => 'Sate Padang',
+                                'description' => 'Sate daging sapi dengan kuah kental dan pedas.',
+                                'image' => 'sate-padang.jpg',
+                            ],
+                            (object)[
+                                'name' => 'Nasi Padang',
+                                'description' => 'Nasi putih dengan berbagai pilihan lauk.',
+                                'image' => 'nasi-padang.jpg',
+                            ],
+                        ]),
+                    ],
+                    (object)[
+                        'name' => 'Restoran Sushi Tokyo',
+                        'menus' => collect([
+                            (object)[
+                                'name' => 'Sushi Salmon',
+                                'description' => 'Irisan salmon segar di atas nasi sushi.',
+                                'image' => 'sushi-salmon.jpg',
+                            ],
+                            (object)[
+                                'name' => 'Maki Sushi',
+                                'description' => 'Sushi gulung dengan bahan pilihan seperti tuna dan alpukat.',
+                                'image' => 'maki-sushi.jpg',
+                            ],
+                            (object)[
+                                'name' => 'Tempura',
+                                'description' => 'Udang dan sayuran goreng tepung, renyah di luar dan lembut di dalam.',
+                                'image' => 'tempura.jpg',
+                            ],
+                        ]),
+                    ],
+                ]);
+                ?>
+                @foreach ($restaurants as $restaurant)
+                    <!-- Nama Restoran -->
+                    <nav class="w-full z-30 top-0 px-6 py-1">
+                        <div class="w-full container mx-auto flex flex-wrap items-center mt-0 px-2 py-3">
+                            <a class="uppercase tracking-wide no-underline hover:no-underline font-bold text-gray-800 text-xl"
+                                href="#">
+                                {{ $restaurant->name }}
                             </a>
-
-                            <a class="pl-3 inline-block no-underline hover:text-black" href="#">
+                            <a class="ml-4 uppercase tracking-wide no-underline hover:underline font-bold text-gray-800 text-xl border-2 border-gray-800 py-2 px-4 rounded"
+                                href="#">
+                                Add to cart
                             </a>
-
                         </div>
+                    </nav>
+                    <!-- Daftar Menu -->
+                    <div class="flex flex-wrap -mx-2">
+                        @foreach ($restaurant->menus as $menu)
+                            <div class="w-full md:w-1/3 xl:w-1/5 p-6 flex flex-col">
+                                <a href="#">
+                                    <img class="hover:grow hover:shadow-lg" src="{{ asset('images/' . $menu->image) }}"
+                                        alt="{{ $menu->name }}">
+                                    <div class="text-black pt-3 flex items-center justify-between">
+                                        <p class="">{{ $menu->name }}</p>
+                                    </div>
+                                    <p class="pt-1 text-gray-500">{{ $menu->description }}</p>
+                                </a>
+                            </div>
+                        @endforeach
                     </div>
-                </nav>
-
-                <div class="w-full md:w-1/3 xl:w-1/5 p-6 flex flex-col">
-                    <a href="#">
-                        <img class="hover:grow hover:shadow-lg" src="images/nayamgoreng.jpg">
-                        <div class="text-black pt-3 flex items-center justify-between">
-                            <p class="">Nasi Ayam Goreng Complete</p>
-                        </div>
-                        <p class="pt-1 text-gray-500">Nasi + Ayam + dll</p>
-                    </a>
-                </div>
-                <div class="w-full md:w-1/3 xl:w-1/5 p-6 flex flex-col">
-                    <a href="#">
-                        <img class="hover:grow hover:shadow-lg" src="images/nayamgoreng.jpg">
-                        <div class="text-black pt-3 flex items-center justify-between">
-                            <p class="">Nasi Ayam Goreng Complete</p>
-                        </div>
-                        <p class="pt-1 text-gray-500">Nasi + Ayam + dll</p>
-                    </a>
-                </div>
-                <div class="w-full md:w-1/3 xl:w-1/5 p-6 flex flex-col">
-                    <a href="#">
-                        <img class="hover:grow hover:shadow-lg" src="images/nayamgoreng.jpg">
-                        <div class="text-black pt-3 flex items-center justify-between">
-                            <p class="">Nasi Ayam Goreng Complete</p>
-                        </div>
-                        <p class="pt-1 text-gray-500">Nasi + Ayam + dll</p>
-                    </a>
-                </div>
-                <nav id="store" class="w-full z-30 top-0 px-6 py-1">
-                    <div class="w-full container mx-auto flex flex-wrap items-center mt-0 px-2 py-3">
-                        <a class="uppercase tracking-wide no-underline hover:no-underline font-bold text-gray-800 text-xl "
-                            href="#">
-                            Restaurant 2
-                        </a>
-                        <a class="ml-4 uppercase tracking-wide no-underline hover:underline font-bold text-gray-800 text-xl border-2 border-gray-800 py-2 px-4 rounded"
-                            href="#">
-                            Add to cart
-                        </a>
-
-                        <div class="flex items-center" id="store-nav-content">
-                            <a class="pl-3 inline-block no-underline hover:text-black" href="#">
-                            </a>
-
-                            <a class="pl-3 inline-block no-underline hover:text-black" href="#">
-                            </a>
-
-                        </div>
-                    </div>
-                </nav>
-
-                <div class="w-full md:w-1/3 xl:w-1/3 p-6 flex flex-col">
-                    <a href="#">
-                        <img class="hover:grow hover:shadow-lg" src="images/nayamgoreng.jpg">
-                        <div class="text-black pt-3 flex items-center justify-between">
-                            <p class="">Nasi Ayam Goreng Complete</p>
-                        </div>
-                        <p class="pt-1 text-gray-500">Nasi + Ayam + dll</p>
-                    </a>
-                </div>
-                <div class="w-full md:w-1/3 xl:w-1/3 p-6 flex flex-col">
-                    <a href="#">
-                        <img class="hover:grow hover:shadow-lg" src="images/nayamgoreng.jpg">
-                        <div class="text-black pt-3 flex items-center justify-between">
-                            <p class="">Nasi Ayam Goreng Complete</p>
-                        </div>
-                        <p class="pt-1 text-gray-500">Nasi + Ayam + dll</p>
-                    </a>
-                </div>
-                <div class="w-full md:w-1/3 xl:w-1/3 p-6 flex flex-col">
-                    <a href="#">
-                        <img class="hover:grow hover:shadow-lg" src="images/nayamgoreng.jpg">
-                        <div class="text-black pt-3 flex items-center justify-between">
-                            <p class="">Nasi Ayam Goreng Complete</p>
-                        </div>
-                        <p class="pt-1 text-gray-500">Nasi + Ayam + dll</p>
-                    </a>
-                </div>
-                <nav id="store" class="w-full z-30 top-0 px-6 py-1">
-                    <div class="w-full container mx-auto flex flex-wrap items-center mt-0 px-2 py-3">
-                        <a class="uppercase tracking-wide no-underline hover:no-underline font-bold text-gray-800 text-xl "
-                            href="#">
-                            Restaurant 3
-                        </a>
-                        <a class="ml-4 uppercase tracking-wide no-underline hover:underline font-bold text-gray-800 text-xl border-2 border-gray-800 py-2 px-4 rounded"
-                            href="#">
-                            Add to cart
-                        </a>
-
-                        <div class="flex items-center" id="store-nav-content">
-                            <a class="pl-3 inline-block no-underline hover:text-black" href="#">
-                            </a>
-
-                            <a class="pl-3 inline-block no-underline hover:text-black" href="#">
-                            </a>
-
-                        </div>
-                    </div>
-                </nav>
-
-                <div class="w-full md:w-1/3 xl:w-1/3 p-6 flex flex-col">
-                    <a href="#">
-                        <img class="hover:grow hover:shadow-lg" src="images/nayamgoreng.jpg">
-                        <div class="text-black pt-3 flex items-center justify-between">
-                            <p class="">Nasi Ayam Goreng Complete</p>
-                        </div>
-                        <p class="pt-1 text-gray-500">Nasi + Ayam + dll</p>
-                    </a>
-                </div>
-                <div class="w-full md:w-1/3 xl:w-1/3 p-6 flex flex-col">
-                    <a href="#">
-                        <img class="hover:grow hover:shadow-lg" src="images/nayamgoreng.jpg">
-                        <div class="text-black pt-3 flex items-center justify-between">
-                            <p class="">Nasi Ayam Goreng Complete</p>
-                        </div>
-                        <p class="pt-1 text-gray-500">Nasi + Ayam + dll</p>
-                    </a>
-                </div>
-                <div class="w-full md:w-1/3 xl:w-1/3 p-6 flex flex-col">
-                    <a href="#">
-                        <img class="hover:grow hover:shadow-lg" src="images/nayamgoreng.jpg">
-                        <div class="text-black pt-3 flex items-center justify-between">
-                            <p class="">Nasi Ayam Goreng Complete</p>
-                        </div>
-                        <p class="pt-1 text-gray-500">Nasi + Ayam + dll</p>
-                    </a>
-                </div>
-
-
+                @endforeach
             </div>
         </section>
     </x-layout>
-
-
 </body>
