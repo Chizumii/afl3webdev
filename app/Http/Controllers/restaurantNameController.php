@@ -7,13 +7,13 @@ use Illuminate\Http\Request;
 
 class restaurantNameController extends Controller
 {
-    public function showAllRestaurants()
-    {
-        $restos = resto::all();
+    // public function showAllRestaurants()
+    // {
+    //     $restos = resto::all();
 
-        return view('restaurants', [
-            'pagetitle' => "Daftar Restoran",
-            'restos' => $restos
-        ]);
-    }
+    //     return view('restaurants', [
+    //         'pagetitle' => "Daftar Restoran",
+    //         'restos' => $restos
+    //     ]);
+    // }
 }
