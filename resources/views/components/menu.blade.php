@@ -2,7 +2,7 @@
     <div class="container mx-auto flex flex-wrap pt-4 pb-12">
 
         <div class="flex flex-wrap -mx-2">
-            @foreach ($menus as $menu)
+            @foreach ($menus  as $menu)
                 <div class="w-full md:w-1/3 xl:w-1/4 p-6 flex flex-col">
                     <a href="#">
                         <img class="hover:grow hover:shadow-lg"
@@ -12,7 +12,7 @@
                             alt=" ">
                         <div class="text-black pt-3 flex items-center justify-between">
                             <p class="font-semibold text-m">
-                                {{ $menu->restos->resto_name ?? 'Unknown Restaurant' }}
+                                {{ $menu->restos->resto_name ?? 'Unknown Name' }}
                             </p>
                         </div>
                         <div class="text-black pt-3 flex items-center justify-between">

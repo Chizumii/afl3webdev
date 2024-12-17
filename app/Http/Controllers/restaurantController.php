@@ -20,7 +20,8 @@ class restaurantController extends Controller
 
         return view('restaurant', [
             'menus' => $menus,
-            'restos' => $restos
+            'restos' => $restos,
+            "pagetitle" => "Restaurant"
         ]);
     }
 

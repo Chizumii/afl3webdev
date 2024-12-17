@@ -25,6 +25,11 @@ Route::get('/profile', function () {
         "pagetitle" => "profile"
     ]);
 });
+Route::get('/cart', function () {
+    return view('cart',[
+        "pagetitle" => "Cart"
+    ]);
+});
 Route::get('/signup', function () {
     return view('signup',[
         "pagetitle" => "Login"
