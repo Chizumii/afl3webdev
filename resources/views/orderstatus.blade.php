@@ -54,38 +54,6 @@
         <x-navigation></x-navigation>
         <x-slot:layoutTitle>{{ $pagetitle }}</x-slot:layoutTitle>
 
-        <?php
-        $orders = collect([
-            (object)[
-                'id' => 1,
-                'name' => 'Ayam Goreng',
-                'description' => 'ayam dengan nasi dan lalapan',
-                'price' => 15000,
-                'quantity' => 1,
-                'image' => 'nayamgoreng.jpg',
-            ],
-            (object)[
-                'id' => 2,
-                'name' => 'Ayam Goreng',
-                'description' => 'ayam dengan nasi dan lalapan',
-                'price' => 8000,
-                'quantity' => 1,
-                'image' => 'nayamgoreng.jpg',
-            ],
-            (object)[
-                'id' => 3,
-                'name' => 'Ayam Goreng',
-                'description' => 'ayam dengan nasi dan lalapan',
-                'price' => 25000,
-                'quantity' => 1,
-                'image' => 'nayamgoreng.jpg',
-            ],
-        ]);
-        $totalItems = $orders->sum('quantity');
-        $totalPrice = $orders->sum(function ($order) {
-            return $order->price * $order->quantity;
-        });
-        ?>
 
         <section class="bg-white py-8">
             <div class="container mx-auto flex items-center flex-wrap pt-4 pb-12">

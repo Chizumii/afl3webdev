@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\restaurantController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -13,11 +14,11 @@ Route::get('/home', function () {
         "pagetitle" => "KATERINGKU"
     ]);
 });
-Route::get('/restaurant', function () {
-    return view('restaurant',[
-        "pagetitle" => "Restaurant"
-    ]);
-});
+// Route::get('/restaurant', function () {
+//     return view('restaurant',[
+//         "pagetitle" => "Restaurant"
+//     ]);
+// });
 Route::get('/profile', function () {
     return view('profile',[
         "pagetitle" => "profile"
@@ -43,5 +44,5 @@ Route::get('/orderstatus', function () {
         "pagetitle" => "Order Status"
     ]);
 });
-Route::delete('/delete-order/{id}', [ProjectController::class, 'deleteOrder']);
 
+Route::get('/restaurant', [restaurantController::class,'showRestaurants'])->name('restaurant');

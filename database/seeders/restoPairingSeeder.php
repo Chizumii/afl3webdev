@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\restoPairing;
+use App\Models\restopairing;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -13,6 +13,6 @@ class restoPairingSeeder extends Seeder
      */
     public function run(): void
     {
-        restoPairing::factory(99)->create();
+        restopairing::factory(99)->create();
     }
 }

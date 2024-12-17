@@ -11,13 +11,14 @@ use Illuminate\Http\Request;
 
 class restaurantController extends Controller
 {
-    
-    public function showRestaurants() {
-        $restos = resto::with('menus')->get(); // Ambil semua restoran dengan menu terkait
-        $menus = menu::all(); // Ambil semua menu
-    
-        return view('restaurant', compact('restos', 'menus'))
-            ->with('pagetitle', 'Daftar Restoran');
+
+    public function showRestaurants()
+    {
+        // Ambil semua restoran dengan menu terkait
+        $menus = menu::with('restos')->get(); // Ambil semua menu
+
+        return view('restaurant', [
+            'menus' => $menus
+        ]);
     }
-    
 }

@@ -2,17 +2,17 @@
 <html lang= "en">
 
 <head>
-    <title>{{ $layoutTitle }}</title>
+    {{-- <title>{{ $layoutTitle }}</title> --}}
     @vite('resources/css/app.css')
 </head>
 
 <body>
     <div>
-            <main>
-                {{ $slot }}
-            </main>
-        </div>
-    
+        <main>
+            {{ $slot }}
+        </main>
+    </div>
+
 </body>
 
 </html>

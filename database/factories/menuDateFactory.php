@@ -2,15 +2,13 @@
 
 namespace Database\Factories;
 
-use App\Models\deliveryStatus;
-use App\Models\menuDate;
-use App\Models\orderUser;
+use App\Models\menu;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\orderDetail>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\menuDate>
  */
-class orderDetailFactory extends Factory
+class menuDateFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -20,11 +18,8 @@ class orderDetailFactory extends Factory
     public function definition(): array
     {
         return [
-            'order_user_id' => orderUser::factory(),
-            'menu_date_id'=> menuDate::factory(),
-            'delivery_status_id'=> deliveryStatus::factory(),
-            'price' => $this->faker->randomFloat(2, 10000.01, 600000.01),
-            'unit' => $this->faker->numberBetween(1,10)
+            'menu_id'=> menu::factory(),
+            'date'=> $this->faker->date(),
         ];
     }
 }
