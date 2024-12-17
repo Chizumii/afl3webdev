@@ -1,7 +1,6 @@
 <section class="bg-white py-8">
     <div class="container mx-auto flex flex-wrap pt-4 pb-12">
 
-        <!-- Daftar Menu -->
         <div class="flex flex-wrap -mx-2">
             @foreach ($menus as $menu)
                 <div class="w-full md:w-1/3 xl:w-1/4 p-6 flex flex-col">
