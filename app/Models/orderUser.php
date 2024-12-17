@@ -7,27 +7,29 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Menu extends Model
+class orderUser extends Model
 {
     use HasFactory;
+
     protected $fillable = [
-        'menuName',
-        'description',
-        'price',
-        'image',
-        'resto_id'
+        'user_id',
+        'totalPrice',
+        'date',
+        'isPaymentStatus',
     ];
 
-    public static function getAllMenu()
+    public static function getAllOrderUser()
     {
         return self::all();
     }
 
+
     // penghubung relation database
-    public function restos(): BelongsTo{
-        return $this->belongsTo(resto::class);
+    public function users(): BelongsTo{
+        return $this->belongsTo(users::class);
     }
-    public function menuDates(): HasMany{
-        return $this->hasMany(menuDate::class, 'menu_id');
+
+    public function orderDetails(): HasMany{
+        return $this->hasMany(orderDetail::class, 'order_user_id');
     }
 }

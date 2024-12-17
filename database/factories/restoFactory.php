@@ -5,9 +5,9 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Project>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\resto>
  */
-class ProjectFactory extends Factory
+class restoFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,7 +17,9 @@ class ProjectFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'resto_name'=> $this->faker->company(),
+            'address'=> $this->faker->address(),
+            'number'=> $this->faker->phoneNumber(),
         ];
     }
 }

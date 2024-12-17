@@ -5,9 +5,9 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Restaurant>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\users>
  */
-class RestaurantFactory extends Factory
+class usersFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,9 +17,7 @@ class RestaurantFactory extends Factory
     public function definition(): array
     {
         return [
-          'name' => $this->faker->company, // Nama restoran
-        'created_at' => now(),
-        'updated_at' => now(),
+            //
         ];
     }
 }

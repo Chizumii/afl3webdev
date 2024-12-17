@@ -8,7 +8,6 @@
 
 <body>
     <div>
-            <x-navigation></x-navigation>
             <main>
                 {{ $slot }}
             </main>

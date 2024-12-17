@@ -51,33 +51,34 @@
 
 <body>
     <x-layout>
+        <x-navigation></x-navigation>
         <x-slot:layoutTitle>{{ $pagetitle }}</x-slot:layoutTitle>
 
         <?php
         $orders = collect([
             (object)[
                 'id' => 1,
-                'name' => 'Laptop Gaming',
-                'description' => 'Laptop dengan spesifikasi tinggi untuk gaming.',
-                'price' => 15000000,
+                'name' => 'Ayam Goreng',
+                'description' => 'ayam dengan nasi dan lalapan',
+                'price' => 15000,
                 'quantity' => 1,
-                'image' => 'laptop-gaming.jpg',
+                'image' => 'nayamgoreng.jpg',
             ],
             (object)[
                 'id' => 2,
-                'name' => 'Smartphone',
-                'description' => 'Smartphone terbaru dengan kamera canggih.',
-                'price' => 8000000,
+                'name' => 'Ayam Goreng',
+                'description' => 'ayam dengan nasi dan lalapan',
+                'price' => 8000,
                 'quantity' => 1,
-                'image' => 'smartphone.jpg',
+                'image' => 'nayamgoreng.jpg',
             ],
             (object)[
                 'id' => 3,
-                'name' => 'Headphones',
-                'description' => 'Headphones noise-canceling untuk pengalaman audio terbaik.',
-                'price' => 2500000,
+                'name' => 'Ayam Goreng',
+                'description' => 'ayam dengan nasi dan lalapan',
+                'price' => 25000,
                 'quantity' => 1,
-                'image' => 'headphones.jpg',
+                'image' => 'nayamgoreng.jpg',
             ],
         ]);
         $totalItems = $orders->sum('quantity');
@@ -97,7 +98,7 @@
                         <div id="order-{{ $order->id }}" class="w-full md:w-2/3 xl:w-full p-6 flex border-2 border-gray-800 rounded-lg mt-4">
                             <a href="#" class="flex w-full">
                                 <div class="w-2/3 pl-4 flex">
-                                    <img class="hover:grow hover:shadow-lg w-1/5 rounded-lg" src="{{ asset('storage/' . $order->image) }}" alt="{{ $order->name }}">
+                                    <img class="hover:grow hover:shadow-lg w-1/5 rounded-lg" src="{{ asset('images/' . $order->image) }}" alt="{{ $order->name }}">
                                     <div class="w-2/3 pl-4">
                                         <div class="text-black pt-3 flex items-center justify-between">
                                             <p class="text-xl font-semibold">{{ $order->name }}</p>

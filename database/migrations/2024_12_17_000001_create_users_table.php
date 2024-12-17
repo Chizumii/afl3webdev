@@ -11,8 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('orders', function (Blueprint $table) {
-            $table->id();
+        Schema::create('users', function (Blueprint $table) {
+            $table->id(); // Laravel default primary key
+            $table->string('username');
+            $table->string('password');
+            $table->text('address');
+            $table->string('number');
             $table->timestamps();
         });
     }
@@ -22,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('orders');
+        Schema::dropIfExists('users');
     }
 };

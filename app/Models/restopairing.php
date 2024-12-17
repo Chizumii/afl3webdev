@@ -1,3 +1,4 @@
+
 <?php
 
 namespace App\Models;
@@ -5,20 +6,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Menu extends Model
+class restoPairing extends Model
 {
     use HasFactory;
+
     protected $fillable = [
-        'menuName',
-        'description',
-        'price',
-        'image',
-        'resto_id'
+        'resto_id',
+        'category_id',
     ];
 
-    public static function getAllMenu()
+    public static function getAllRestoPairing()
     {
         return self::all();
     }
@@ -27,7 +25,7 @@ class Menu extends Model
     public function restos(): BelongsTo{
         return $this->belongsTo(resto::class);
     }
-    public function menuDates(): HasMany{
-        return $this->hasMany(menuDate::class, 'menu_id');
+    public function categories(): BelongsTo{
+        return $this->belongsTo(category::class);
     }
 }

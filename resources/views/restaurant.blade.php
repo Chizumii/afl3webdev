@@ -57,6 +57,8 @@
 </head>
 <body>
     <x-layout>
+
+        <x-navigation></x-navigation>
         <x-slot:layoutTitle>{{ $pagetitle}}</x-slot:layoutTitle>
         <div class="text-gray-800 text-lg font-bold text-left ml-24 my-4">
             <label for="current-date" class="block mb-2">Pilih Tanggal:</label>
@@ -73,17 +75,17 @@
                             (object)[
                                 'name' => 'Rendang',
                                 'description' => 'Daging sapi dimasak dengan bumbu kaya rempah.',
-                                'image' => 'rendang.jpg',
+                                'image' => 'nayamgoreng.jpg',
                             ],
                             (object)[
                                 'name' => 'Sate Padang',
                                 'description' => 'Sate daging sapi dengan kuah kental dan pedas.',
-                                'image' => 'sate-padang.jpg',
+                                'image' => 'nayamgoreng.jpg',
                             ],
                             (object)[
                                 'name' => 'Nasi Padang',
                                 'description' => 'Nasi putih dengan berbagai pilihan lauk.',
-                                'image' => 'nasi-padang.jpg',
+                                'image' => 'nayamgoreng.jpg',
                             ],
                         ]),
                     ],
@@ -93,17 +95,17 @@
                             (object)[
                                 'name' => 'Sushi Salmon',
                                 'description' => 'Irisan salmon segar di atas nasi sushi.',
-                                'image' => 'sushi-salmon.jpg',
+                                'image' => 'nayamgoreng.jpg',
                             ],
                             (object)[
                                 'name' => 'Maki Sushi',
                                 'description' => 'Sushi gulung dengan bahan pilihan seperti tuna dan alpukat.',
-                                'image' => 'maki-sushi.jpg',
+                                'image' => 'nayamgoreng.jpg',
                             ],
                             (object)[
                                 'name' => 'Tempura',
                                 'description' => 'Udang dan sayuran goreng tepung, renyah di luar dan lembut di dalam.',
-                                'image' => 'tempura.jpg',
+                                'image' => 'nayamgoreng.jpg',
                             ],
                         ]),
                     ],
@@ -126,7 +128,7 @@
                     <!-- Daftar Menu -->
                     <div class="flex flex-wrap -mx-2">
                         @foreach ($restaurant->menus as $menu)
-                            <div class="w-full md:w-1/3 xl:w-1/5 p-6 flex flex-col">
+                            <div class="w-full md:w-1/3 xl:w-1/3 p-6 flex flex-col">
                                 <a href="#">
                                     <img class="hover:grow hover:shadow-lg" src="{{ asset('images/' . $menu->image) }}"
                                         alt="{{ $menu->name }}">

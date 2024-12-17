@@ -9,7 +9,7 @@
             <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
                 Get started
             </h1>
-          <form class="space-y-6" action="#" method="POST">
+          <form class="space-y-6" action="/home" method="POST">
             <div>
               <label for="email" class="block text-sm/6 font-medium text-gray-900 mt-4">Email address</label>
               <div class="mt-2">

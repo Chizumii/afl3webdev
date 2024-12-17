@@ -9,18 +9,24 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up() {
+    public function up(): void
+    {
         Schema::create('menus', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('restaurant_id')->constrained()->onDelete('cascade'); // Relasi ke restoran
-            $table->string('name');
+            $table->foreignId('resto_id')->constrained('restos')->onDelete('cascade');
+            $table->string('menu_name');
             $table->text('description');
-            $table->string('image')->nullable();
+            $table->decimal('price');
+            $table->string('image');
             $table->timestamps();
         });
     }
 
-    public function down() {
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
         Schema::dropIfExists('menus');
     }
 };

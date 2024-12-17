@@ -6,28 +6,27 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Facades\Hash;
 
-class Menu extends Model
+class resto extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'menuName',
-        'description',
-        'price',
-        'image',
-        'resto_id'
+        'restoName',
+        'address',
+        'number',
     ];
 
-    public static function getAllMenu()
+    public static function getAllResto()
     {
         return self::all();
     }
 
     // penghubung relation database
-    public function restos(): BelongsTo{
-        return $this->belongsTo(resto::class);
+    public function menus(): HasMany{
+        return $this->hasMany(menu::class, 'resto_id');
     }
-    public function menuDates(): HasMany{
-        return $this->hasMany(menuDate::class, 'menu_id');
+    public function restoPairings(): HasMany{
+        return $this->hasMany(restoPairing::class, 'resto_id');
     }
 }
