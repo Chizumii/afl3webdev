@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\restaurantController;
+use App\Http\Controllers\restaurantNameController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {

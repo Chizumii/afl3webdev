@@ -12,7 +12,7 @@ class resto extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'restoName',
+        'resto_name',
         'address',
         'number',
     ];
