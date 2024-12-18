@@ -1,33 +1,27 @@
 <?php
 
-use App\Http\Controllers\ProjectController;
-use App\Http\Controllers\restaurantController;
-use App\Http\Controllers\restaurantNameController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\MenuController;
+use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Route;
 
+
+
 Route::get('/', function () {
-    return view('welcome',[
-        "pagetitle" => "KATERINGKU"
-    ]);
-});
-Route::get('/home', function () {
     return view('home',[
         "pagetitle" => "KATERINGKU"
     ]);
 });
-// Route::get('/restaurant', function () {
-//     return view('restaurant',[
-//         "pagetitle" => "Restaurant"
-//     ]);
-// });
+use App\Http\Controllers\restaurantController;
+
+
+Route::get('/restaurants', [restaurantController::class,'showRestaurants'])->name('restaurant');
+
+Route::get('/restaurants/{id}', [RestaurantController::class, 'find'])->name('restaurants.show');
+
 Route::get('/profile', function () {
     return view('profile',[
         "pagetitle" => "profile"
-    ]);
-});
-Route::get('/cart', function () {
-    return view('cart',[
-        "pagetitle" => "Cart"
     ]);
 });
 Route::get('/signup', function () {
@@ -51,4 +45,22 @@ Route::get('/orderstatus', function () {
     ]);
 });
 
-Route::get('/restaurant', [restaurantController::class,'showRestaurants'])->name('restaurant');
+
+
+
+// Route::get('signup', [RegisterController::class, 'create'])->name('signup');
+// Route::post('register', [RegisterController::class, 'store'])->name('register');
+
+Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register.form');
+Route::post('/register', [AuthController::class, 'register'])->name('register');
+
+Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login.form');
+Route::post('/login', [AuthController::class, 'login'])->name('login');
+
+Route::get('/home', function () {
+    return view('home'); // Mengarah ke resources/views/home.blade.php
+})->name('home')->middleware('auth'); // Hanya bisa diakses jika user sudah login
+
+
+
+Route::get('/menu', [MenuController::class, 'index'])->name('menu.index');

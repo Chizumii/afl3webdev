@@ -25,9 +25,10 @@ class Menu extends Model
 
     // penghubung relation database
     public function restos(): BelongsTo{
-        return $this->belongsTo(resto::class);
+        return $this->belongsTo(resto::class, 'resto_id', 'id');
     }
-    public function menuDates(): HasMany{
-        return $this->hasMany(menuDate::class, 'menu_id');
+    public function menuDates(): HasMany
+    {
+        return $this->hasMany(MenuDate::class, 'menu_id', 'id');
     }
 }

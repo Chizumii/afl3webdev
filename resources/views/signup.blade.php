@@ -1,5 +1,5 @@
 <x-layout>
-    <x-slot:layoutTitle>{{ $pagetitle }}</x-slot:layoutTitle>
+    {{-- <x-slot:layoutTitle>{{ $pagetitle }}</x-slot:layoutTitle> --}}
     <section class="bg-white">
         <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
             <div class="sm:mx-auto sm:w-full sm:max-w-sm">
@@ -17,7 +17,13 @@
                             <label for="confirm-password" class="block mb-2 text-sm font-medium text-gray-900">Username</label>
                             <input type="text" name="confirm-password" id="confirm-password" placeholder="bla-bla" class="bg-gray-50 border border-[#E2CEB1] text-gray-900 text-sm rounded-lg focus:ring-[#E2CEB1] focus:border-[#E2CEB1] block w-full p-2.5" required="">
                         </div>
-                    
+                        
+                        <!-- Email Input -->
+                        <div>
+                            <label for="email" class="block mb-2 text-sm font-medium text-gray-900 ">Your email</label>
+                            <input type="email" name="email" id="email" class="bg-gray-50 border border-[#E2CEB1] text-gray-900 text-sm rounded-lg focus:ring-[#E2CEB1] focus:border-[#E2CEB1] block w-full p-2.5 " placeholder="name@company.com" required="">
+                        </div>
+                        
                         <!-- Password Input -->
                         <div>
                             <label for="password" class="block mb-2 text-sm font-medium text-gray-900 ">Password</label>

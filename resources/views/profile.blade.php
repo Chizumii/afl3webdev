@@ -1,6 +1,6 @@
 <x-layout>
     <x-navigation></x-navigation>
-    <x-slot:layoutTitle>{{ $pagetitle }}</x-slot:layoutTitle>
+    {{-- <x-slot:layoutTitle>{{ $pagetitle }}</x-slot:layoutTitle> --}}
     <form>
         <div class="space-y-12 ml-16 mr-16 mt-4">
             <div class="border-b border-gray-900/10 pb-12">

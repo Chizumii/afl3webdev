@@ -19,7 +19,7 @@ class orderUserFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id'=> users::factory(),
+            'user_id'=> User::factory(),
             'total_price'=> $this->faker->randomFloat(2, 10000.01, 600000.01),
             'date'=> $this->faker->dateTimeThisYear(),
             'is_payment_status'=> $this->faker->boolean(),

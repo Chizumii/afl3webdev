@@ -19,7 +19,7 @@ class menuDateFactory extends Factory
     {
         return [
             'menu_id'=> menu::factory(),
-            'date'=> $this->faker->date(),
+            'date'=> $this->faker->dateTimeBetween('2025-01-01', '2025-12-31')->format('Y-m-d'),
         ];
     }
 }

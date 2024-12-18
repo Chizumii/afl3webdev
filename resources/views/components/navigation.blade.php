@@ -14,7 +14,7 @@
                             <a href="/home"
                                 class="rounded-md px-3 py-2 text-sm font-medium text-white hover:text-[#A07658] {{ request()->is('home') ? 'text-[#A07658]' : '' }}"
                                 aria-current="page">Home</a>
-                            <a href="/restaurant"
+                            <a href="/restaurants"
                                 class="rounded-md px-3 py-2 text-sm font-medium text-white hover:text-[#A07658]{{ request()->is('restaurant') ? 'text-[#A07658]' : '' }}">Restaurant</a>
                             <a href="/fusion"
                                 class="rounded-md px-3 py-2 text-sm font-medium text-white hover:text-[#A07658] {{ request()->is('fusion') ? 'text-[#A07658]' : '' }}">Fusions</a>

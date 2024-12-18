@@ -1,5 +1,5 @@
 <x-layout>
-    <x-slot:layoutTitle>{{ $pagetitle }}</x-slot:layoutTitle>
+    {{-- <x-slot:layoutTitle>{{ $pagetitle }}</x-slot:layoutTitle> --}}
     <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
         <div class="sm:mx-auto sm:w-full sm:max-w-sm">
           <img class="mx-auto h-24 w-auto" src="images/logos.png" alt="Logo">
@@ -11,9 +11,9 @@
             </h1>
           <form class="space-y-6" action="/home" method="POST">
             <div>
-              <label for="email" class="block text-sm/6 font-medium text-gray-900 mt-4">Username</label>
+              <label for="email" class="block text-sm/6 font-medium text-gray-900 mt-4">z</label>
               <div class="mt-2">
-                <input type="username" name="username" id="username" autocomplete="email" required class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-[#E2CEB1] placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-[#E2CEB1] sm:text-sm/6">
+                <input type="email" name="email" id="email" autocomplete="email" required class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-[#E2CEB1] placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-[#E2CEB1] sm:text-sm/6">
               </div>
             </div>
       

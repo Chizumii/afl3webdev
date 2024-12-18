@@ -56,7 +56,7 @@
     }
 </style>
 <x-layout>
-    <x-slot name="layoutTitle">{{ $pagetitle }}</x-slot>
+    {{-- <x-slot:layoutTitle>{{ $pagetitle}}</x-slot:layoutTitle> --}}
     <div class="carousel relative container mx-auto" style="max-width:1600px;">
         <div class="carousel-inner relative overflow-hidden w-full">
             <!--Slide 1-->

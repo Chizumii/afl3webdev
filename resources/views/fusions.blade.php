@@ -55,7 +55,7 @@
 </style>
 <x-layout>
     <x-navigation></x-navigation>
-    <x-slot:layoutTitle>{{ $pagetitle }}</x-slot:layoutTitle>
+    {{-- <x-slot:layoutTitle>{{ $pagetitle }}</x-slot:layoutTitle> --}}
     <section class="bg-white py-8">
         <div class="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-4">
             <div class="border-2 border-gray-800 rounded-lg bg-cover bg-center flex items-center justify-center"

@@ -24,7 +24,7 @@ class resto extends Model
 
     // penghubung relation database
     public function menus(): HasMany{
-        return $this->hasMany(menu::class, 'resto_id');
+        return $this->hasMany(menu::class, 'resto_id', 'id');
     }
     public function restoPairings(): HasMany{
         return $this->hasMany(restoPairing::class, 'resto_id');

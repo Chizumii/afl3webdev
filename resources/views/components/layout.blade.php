@@ -2,7 +2,7 @@
 <html lang= "en">
 
 <head>
-    <title>{{ $layoutTitle }}</title>
+        {{-- <title>{{ $layoutTitle }}</title> --}}
     @vite('resources/css/app.css')
 </head>
 

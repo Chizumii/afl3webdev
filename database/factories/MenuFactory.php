@@ -253,6 +253,12 @@ class menuFactory extends Factory
             'Ketupat' => 'Rice cakes wrapped in palm leaves, commonly served during holidays and eaten with dishes like satay or curry.'
         ];
 
+        // Pilih menu acak
+        $selectedMenus = $this->faker->randomElements($menuName, $this->faker->numberBetween(1, 3));
+
+        // Cocokkan deskripsi
+        $selectedDescriptions = array_map(fn($menu) => $menuDescription[$menu], $selectedMenus);
+
         // Pilih menu secara acak (1 hingga 3)
         $selectedMenu = $this->faker->randomElements($menuName, $this->faker->numberBetween(1, 3));
 
@@ -263,9 +269,9 @@ class menuFactory extends Factory
 
         return [
             'resto_id' => resto::factory(),
-            'menu_name' => implode(',', $this->faker->randomElements($menuName, 3)),
-            'description' => implode(',', $description), // Pastikan deskripsi sesuai dengan menu yang dipilih
-            'price' => number_format($this->faker->numberBetween(60000, 300000), 0, ',', '.'),
+            'menu_name' => implode(', ', $selectedMenus),
+            'description' => implode(', ', $selectedDescriptions), // Pastikan deskripsi sesuai dengan menu yang dipilih
+            'price' => $this->faker->numberBetween(60000, 300000),
             'image' => $this->faker->imageUrl(),
         ];
     }
