@@ -13,6 +13,14 @@ class orderDetailSeeder extends Seeder
      */
     public function run(): void
     {
-        orderDetail::factory(99)->create();
+        orderDetail::create([
+            'order_user_id' => 101,
+            'menu_date_id' => 1, // assuming menu ID 1 exists
+            'delivery_status_id' => 1, // assuming a valid delivery status ID
+            'price' => 150000, // example price per unit
+            'unit' => 3, 
+        ]);
+
+        orderDetail::factory(1)->create();
     }
 }

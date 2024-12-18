@@ -11,6 +11,8 @@ class orderUser extends Model
 {
     use HasFactory;
 
+
+    protected $table = 'order_users';
     protected $fillable = [
         'user_id',
         'totalPrice',
@@ -30,6 +32,11 @@ class orderUser extends Model
     }
 
     public function orderDetails(): HasMany{
-        return $this->hasMany(orderDetail::class, 'order_users_id');
+        return $this->hasMany(orderDetail::class, 'orderUser_id');
     }
+    public function orderUsers()
+{
+    return $this->belongsTo(OrderUser::class, 'order_user_id');
+}
+
 }

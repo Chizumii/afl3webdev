@@ -5,9 +5,9 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\category>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Category>
  */
-class categoryFactory extends Factory
+class CategoryFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,7 +17,33 @@ class categoryFactory extends Factory
     public function definition(): array
     {
         return [
-            'category_name' => $this->faker->randomElement(['Indonesian Food','Chinese Food','Japanese Food','Korean Food','Thai Food','Vietnamese Food','Indian Food','Malaysian Food','Filipino Food','Bangladeshi Food','Pakistani Food','Sri Lankan Food','Nepalese Food','Bengali Food','Turkish Food','Greek Food','Italian Food','Spanish Food','Portuguese Food','German Food','French Food','American Food','Mexican Food','Swiss Food','British Food']),
+            'category_name' => [
+                'Indonesian Food',
+                'Chinese Food',
+                'Japanese Food',
+                'Korean Food',
+                'Thai Food',
+                'Vietnamese Food',
+                'Indian Food',
+                'Malaysian Food',
+                'Filipino Food',
+                'Bangladeshi Food',
+                'Pakistani Food',
+                'Sri Lankan Food',
+                'Nepalese Food',
+                'Bengali Food',
+                'Turkish Food',
+                'Greek Food',
+                'Italian Food',
+                'Spanish Food',
+                'Portuguese Food',
+                'German Food',
+                'French Food',
+                'American Food',
+                'Mexican Food',
+                'Swiss Food',
+                'British Food'
+            ]
         ];
     }
 }

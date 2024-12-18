@@ -21,8 +21,9 @@ class restoPairing extends Model
     }
 
     // penghubung relation database
-    public function restos(): BelongsTo{
-        return $this->belongsTo(resto::class);
+    public function resto()
+    {
+        return $this->belongsTo(resto::class, 'resto_id', 'id');
     }
     public function categories(): BelongsTo{
         return $this->belongsTo(category::class);

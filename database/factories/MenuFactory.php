@@ -61,7 +61,7 @@ class menuFactory extends Factory
             'Samosa',
             'Baklava',
             'Moussaka',
-            'Goulash',
+            'Goulash',  
             'Risotto',
             'Lasagna',
             'Spaghetti',

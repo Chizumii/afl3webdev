@@ -22,9 +22,11 @@ class menuDate extends Model
     }
 
     // penghubung relation database
-    public function menus(): BelongsTo{
-        return $this->belongsTo(menu::class);
+    public function menus()
+    {
+        return $this->belongsTo(Menu::class, 'menu_id');
     }
+    
     public function orderDetails(): HasMany{
         return $this->hasMany(orderDetail::class, 'menuDate_id');
     }

@@ -23,13 +23,20 @@ class orderDetail extends Model
     }
 
     // penghubung relation database
-    public function menuDates(): BelongsTo{
-        return $this->belongsTo(menuDate::class);
+    public function menuDates()
+{
+    return $this->belongsTo(MenuDate::class, 'menu_date_id');
+}
+
+
+    public function deliveryStatuses(): BelongsTo
+    {
+        return $this->belongsTo(deliveryStatus::class, 'delivery_status_id');
     }
-    public function deliveryStatuses(): BelongsTo{
-        return $this->belongsTo(deliveryStatus::class);
+
+    public function orderUsers(): BelongsTo
+    {
+        return $this->belongsTo(orderUser::class, 'order_user_id');
     }
-    public function orderUsers(): BelongsTo{
-        return $this->belongsTo(orderUser::class);
-    }
+    
 }

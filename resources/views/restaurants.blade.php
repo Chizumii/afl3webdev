@@ -1,7 +1,6 @@
 <head>
     <link rel="stylesheet" href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css" />
     <link href="https://fonts.googleapis.com/css?family=Work+Sans:200,400&display=swap" rel="stylesheet">
-
     <style>
         .work-sans {
             font-family: 'Work Sans', sans-serif;

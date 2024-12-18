@@ -6,13 +6,16 @@ use App\Models\deliveryStatus;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class deliveryStatusSeeder extends Seeder
+class deliverySeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        deliveryStatus::factory(99)->create();
+        deliveryStatus::create([
+            'status_name' => 'Delivered',
+        ]);
+        deliveryStatus::factory(1)->create();
     }
 }

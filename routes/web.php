@@ -1,9 +1,15 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\cartController;
+use App\Http\Controllers\categoryController;
+use App\Http\Controllers\fusionController;
+use App\Http\Controllers\fusionsController;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\orderController;
 use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\restaurantController;
 
 
 
@@ -12,13 +18,6 @@ Route::get('/', function () {
         "pagetitle" => "KATERINGKU"
     ]);
 });
-use App\Http\Controllers\restaurantController;
-
-
-Route::get('/restaurants', [restaurantController::class,'showRestaurants'])->name('restaurant');
-
-Route::get('/restaurants/{id}', [RestaurantController::class, 'find'])->name('restaurants.show');
-
 Route::get('/profile', function () {
     return view('profile',[
         "pagetitle" => "profile"
@@ -26,11 +25,6 @@ Route::get('/profile', function () {
 });
 Route::get('/signup', function () {
     return view('signup',[
-        "pagetitle" => "Login"
-    ]);
-});
-Route::get('/signin', function () {
-    return view('signin',[
         "pagetitle" => "Login"
     ]);
 });
@@ -45,8 +39,13 @@ Route::get('/orderstatus', function () {
     ]);
 });
 
+Route::get('/cart', function () {
+    return view('cart');
+})->name('cart.index');
 
 
+Route::get('/restaurants', [restaurantController::class,'showRestaurants'])->name('restaurant');
+Route::get('/restaurants/{id}', [RestaurantController::class, 'find'])->name('restaurants.show');
 
 // Route::get('signup', [RegisterController::class, 'create'])->name('signup');
 // Route::post('register', [RegisterController::class, 'store'])->name('register');
@@ -61,6 +60,18 @@ Route::get('/home', function () {
     return view('home'); // Mengarah ke resources/views/home.blade.php
 })->name('home')->middleware('auth'); // Hanya bisa diakses jika user sudah login
 
-
-
+Route::get('/fusion', [categoryController::class, 'showAllCategory']);
 Route::get('/menu', [MenuController::class, 'index'])->name('menu.index');
+
+Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add');
+
+Route::get('/categories/{id}/restaurants', [fusionController::class, 'show']);
+
+
+// This is causing the error
+// Menampilkan daftar orderan untuk user yang sedang login
+Route::get('/orderstatus', [OrderController::class, 'showOrders'])->name('orders.show');
+Route::get('/orderstatus', [OrderController::class, 'showOrders'])
+    ->middleware('auth')
+    ->name('orders.show');
+

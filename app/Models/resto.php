@@ -23,10 +23,18 @@ class resto extends Model
     }
 
     // penghubung relation database
-    public function menus(): HasMany{
-        return $this->hasMany(menu::class, 'resto_id', 'id');
-    }
+    public function menus()
+{
+    return $this->hasMany(Menu::class, 'resto_id');
+}
     public function restoPairings(): HasMany{
         return $this->hasMany(restoPairing::class, 'resto_id');
     }
+    public function resto()
+{
+    return $this->belongsTo(resto::class, 'resto_id');
+    
+}
+
+
 }

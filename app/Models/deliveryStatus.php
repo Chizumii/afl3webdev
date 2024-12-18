@@ -21,6 +21,6 @@ class deliveryStatus extends Model
 
     // penghubung relation database
     public function orderDetails(): HasMany{
-        return $this->hasMany(orderDetail::class, 'deliveryStatus_id');
+        return $this->hasMany(orderDetail::class, 'delivery_status_id');
     }
 }

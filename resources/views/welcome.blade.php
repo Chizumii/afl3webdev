@@ -70,7 +70,7 @@
                     <div class="flex flex-col w-full lg:w-1/2 md:ml-16 items-center md:items-start px-6 tracking-wide">
                         <p class="text-white text-5xl my-4">WELCOME TO KATERINGKU</p>
                         <a class="text-xl inline-block no-underline border-b border-gray-600 leading-relaxed hover:text-black hover:border-black"
-                            href="/signin">Sign in</a>
+                            href="/login">Sign in</a>
                     </div>
                 </div>
 
