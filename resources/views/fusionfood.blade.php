@@ -3,7 +3,6 @@
         <section class="bg-white py-8">
             <div class="container mx-auto">
                 <h1 class="text-3xl font-bold text-gray-800 mb-6">Restaurants in "{{ $category->category_name }}"</h1>
-
                 @if ($restaurants->isEmpty())
                     <p class="text-center text-gray-500">No restaurants available for this category.</p>
                 @else
@@ -19,13 +18,11 @@
                                     </div>
                                 </a>
                             </div>
-
-                            <!-- Menampilkan Menu untuk Restoran Ini -->
                         @endforeach
 
                     </div>
                 @endif
             </div>
         </section>
-        <x-footer />
+        <x-footer/>
     </x-layout>

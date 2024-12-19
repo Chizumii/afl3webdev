@@ -6,32 +6,30 @@ use Illuminate\Http\Request;
 
 class cartController extends Controller
 {
-    // app/Http/Controllers/CartController.php
-
     public function addToCart(Request $request)
     {
-        $cart = session()->get('cart', []); // Ambil data keranjang dari session (jika ada)
+        $cart = session()->get('cart', []); // Ini buat ambil data keranjang dari session klo ad
     
         $id = $request->input('id');
         $name = $request->input('name');
         $price = $request->input('price');
-        $image = $request->input('image'); // Pastikan image dikirim dari form
+        $image = $request->input('image');
         $quantity = $request->input('quantity', 1);
     
-        // Periksa apakah item sudah ada di keranjang
+        // ini buat memastikan klo ada gak datanya di keranjang
         if (isset($cart[$id])) {
-            $cart[$id]['quantity'] += $quantity; // Tambahkan jumlah jika sudah ada
+            $cart[$id]['quantity'] += $quantity; //buat tambah quantity
         } else {
             $cart[$id] = [
                 'id' => $id,
                 'name' => $name,
                 'price' => $price,
-                'image' => $image, // Pastikan kunci 'image' ada di sini
+                'image' => $image, 
                 'quantity' => $quantity,
             ];
         }
     
-        // Simpan kembali ke session
+        // simpan lg ke session
         session()->put('cart', $cart);
     
         return response()->json([

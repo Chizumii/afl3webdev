@@ -13,10 +13,6 @@
                     @foreach ($orderDetails as $order)
                         <div class="bg-white rounded-lg shadow-md p-6">
                             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                                <div>
-                                    <p class="text-sm text-gray-500">Menu</p>
-                                    <p class="font-medium">{{ $order['menuName'] }}</p>
-                                </div>
 
                                 <div>
                                     <p class="text-sm text-gray-500">Payment Status</p>

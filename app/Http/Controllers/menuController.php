@@ -11,7 +11,7 @@ class MenuController extends Controller
 {
     $selectedDate = $request->input('selected_date');
 
-    $menus = Menu::with('restos') // Load restaurant relation
+    $menus = Menu::with('restos') // ngeload relasi restoran
         ->when($selectedDate, function ($query, $date) {
             $query->whereHas('menuDates', function ($subQuery) use ($date) {
                 $subQuery->where('date', $date);

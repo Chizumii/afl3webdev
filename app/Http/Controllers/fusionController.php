@@ -10,16 +10,17 @@ use Illuminate\Http\Request;
 
 class FusionController extends Controller
 {
-    // Menampilkan restoran berdasarkan kategori
+    // tampilin restoran dari kategori
     public function show($id)
     {
-        // Mencari kategori berdasarkan ID
+        // cari kategori dari id
         $category = category::findOrFail($id);
         
-        // Mengambil restoran dan memuat data menu yang berelasi
+        // ambil restoran dan panggil data menu yang berhubungan
         $restaurants = restoPairing::with(['resto.menus'])->where('category_id', $id)->get();
     
-        // Mengirimkan data ke view
+        // ini untuk kirim ke view
+        // pake compact untuk menggabungkan nama variabel sebagai key dan nilai variabel tersebut sebagai value di dalam array.
         return view('fusionFood', compact('category', 'restaurants'));
     }
  

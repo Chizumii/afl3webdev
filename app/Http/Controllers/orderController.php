@@ -13,26 +13,17 @@ class orderController extends Controller
     {
         $userId = Auth::id();
 
-        // Get the order details along with necessary relationships
         $orderDetails = OrderDetail::with(['menuDates.menus', 'orderUsers', 'deliveryStatuses'])
             ->whereHas('orderUsers', function ($query) use ($userId) {
                 $query->where('user_id', $userId);
             })
             ->get()
             ->map(function ($orderDetail) {
-                $menuName = 'Menu Not Found';
-
-                // Debug relasi menuDates dan menus
-                if ($orderDetail->menuDates && $orderDetail->menuDates->menus) {
-                    $menuName = $orderDetail->menuDates->menus->menuName ?? 'Menu Not Found';
-                }
-
                 $paymentStatus = $orderDetail->orderUsers->isPaymentStatus ?? false;
                 $deliveryStatus = $orderDetail->deliveryStatuses->status_name ?? 'Status Not Found';
 
                 return [
                     'id' => $orderDetail->id,
-                    'menuName' => $menuName,
                     'paymentStatus' => $paymentStatus,
                     'deliveryStatus' => $deliveryStatus,
                     'price' => $orderDetail->price,

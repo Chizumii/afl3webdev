@@ -14,8 +14,8 @@ class restaurantController extends Controller
 
     public function showRestaurants()
     {
-        // Ambil semua restoran dengan menu terkait
-        $menu = menu::with('restos')->get(); // Ambil semua menu
+        // ambil restoran dari menu 
+        $menu = menu::with('restos')->get(); // ambil semua menu
         $resto = resto::with('menus')->get();
 
         return view('restaurants', [

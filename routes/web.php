@@ -47,9 +47,6 @@ Route::get('/cart', function () {
 Route::get('/restaurants', [restaurantController::class,'showRestaurants'])->name('restaurant');
 Route::get('/restaurants/{id}', [RestaurantController::class, 'find'])->name('restaurants.show');
 
-// Route::get('signup', [RegisterController::class, 'create'])->name('signup');
-// Route::post('register', [RegisterController::class, 'store'])->name('register');
-
 Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register.form');
 Route::post('/register', [AuthController::class, 'register'])->name('register');
 
@@ -57,8 +54,8 @@ Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login.form
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 
 Route::get('/home', function () {
-    return view('home'); // Mengarah ke resources/views/home.blade.php
-})->name('home')->middleware('auth'); // Hanya bisa diakses jika user sudah login
+    return view('home'); 
+})->name('home')->middleware('auth'); 
 
 Route::get('/fusion', [categoryController::class, 'showAllCategory']);
 Route::get('/menu', [MenuController::class, 'index'])->name('menu.index');
@@ -67,9 +64,6 @@ Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add')
 
 Route::get('/categories/{id}/restaurants', [fusionController::class, 'show']);
 
-
-// This is causing the error
-// Menampilkan daftar orderan untuk user yang sedang login
 Route::get('/orderstatus', [OrderController::class, 'showOrders'])->name('orders.show');
 Route::get('/orderstatus', [OrderController::class, 'showOrders'])
     ->middleware('auth')
