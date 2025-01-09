@@ -18,26 +18,12 @@ Route::get('/', function () {
         "pagetitle" => "KATERINGKU"
     ]);
 });
-Route::get('/profile', function () {
-    return view('profile',[
-        "pagetitle" => "profile"
-    ]);
-});
 Route::get('/signup', function () {
     return view('signup',[
-        "pagetitle" => "Login"
+        "pagetitle" => "signup"
     ]);
 });
-Route::get('/fusion', function () {
-    return view('fusions',[
-        "pagetitle" => "Fusions"
-    ]);
-});
-Route::get('/orderstatus', function () {
-    return view('orderstatus',[
-        "pagetitle" => "Order Status"
-    ]);
-});
+
 
 Route::get('/cart', function () {
     return view('cart');
@@ -48,7 +34,7 @@ Route::get('/restaurants', [restaurantController::class,'showRestaurants'])->nam
 Route::get('/restaurants/{id}', [RestaurantController::class, 'find'])->name('restaurants.show');
 
 Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register.form');
-Route::post('/register', [AuthController::class, 'register'])->name('register');
+// Route::post('/register', [AuthController::class, 'register'])->name('register');
 
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login.form');
 Route::post('/login', [AuthController::class, 'login'])->name('login');
@@ -65,7 +51,5 @@ Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add')
 Route::get('/categories/{id}/restaurants', [fusionController::class, 'show']);
 
 Route::get('/orderstatus', [OrderController::class, 'showOrders'])->name('orders.show');
-Route::get('/orderstatus', [OrderController::class, 'showOrders'])
-    ->middleware('auth')
-    ->name('orders.show');
+
 

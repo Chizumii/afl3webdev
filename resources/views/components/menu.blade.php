@@ -1,3 +1,62 @@
+<script>
+    function addToCart(menuId, menuName, menuPrice, menuImage) {
+        fetch('{{ route('cart.add') }}', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            },
+            body: JSON.stringify({
+                id: menuId,
+                name: menuName,
+                price: menuPrice,
+                image: menuImage,
+                quantity: 1 // Default quantity
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.message) {
+                alert(data.message); // Notifikasi berhasil
+                updateCartDisplay(data.cart); // Perbarui tampilan cart
+            }
+        })
+        .catch(error => console.error('Error:', error));
+    }
+
+    function updateCartDisplay(cart) {
+        // Anda bisa mengupdate elemen tertentu jika cart ada di halaman lain
+        const cartItemsContainer = document.getElementById('cart-items');
+
+        if (cartItemsContainer) {
+            cartItemsContainer.innerHTML = '';
+            let totalItems = 0;
+            let totalPrice = 0;
+
+            Object.values(cart).forEach(item => {
+                totalItems += item.quantity;
+                totalPrice += item.price * item.quantity;
+
+                cartItemsContainer.innerHTML += `
+                    <div class="flex border-2 border-gray-800 rounded-lg p-4 mt-4">
+                        <img src="${item.image}" alt="${item.name}" class="w-1/5 rounded-lg">
+                        <div class="w-3/5 pl-4">
+                            <p class="font-semibold text-xl">${item.name}</p>
+                            <p class="text-gray-500">Rp ${new Intl.NumberFormat().format(item.price)}</p>
+                            <p class="text-black">Quantity: ${item.quantity}</p>
+                        </div>
+                        <div class="w-1/5 text-right">
+                            <p class="font-semibold text-xl">Rp ${new Intl.NumberFormat().format(item.price * item.quantity)}</p>
+                        </div>
+                    </div>
+                `;
+            });
+
+            document.getElementById('total-items').innerText = totalItems;
+            document.getElementById('total-price').innerText = `Rp ${new Intl.NumberFormat().format(totalPrice)}`;
+        }
+    }
+</script>
 <section class="bg-white py-8">
     <div class="container mx-auto">
 
