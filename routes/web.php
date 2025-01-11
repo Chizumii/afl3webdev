@@ -61,3 +61,16 @@ Route::middleware('auth')->group(function () {
     // Memperbarui profil user
     Route::post('/profile/update', [AuthController::class, 'updateProfile'])->name('profile.update');
 });
+
+
+
+Route::middleware('auth')->group(function () {
+    // Rute untuk menambah item ke keranjang
+    Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
+    
+    // Rute untuk memperbarui quantity item di keranjang
+    Route::post('/cart/update', [CartController::class, 'update'])->name('cart.update');
+    
+    // Rute untuk menghapus item dari keranjang
+    Route::post('/cart/remove', [CartController::class, 'remove'])->name('cart.remove');
+});
