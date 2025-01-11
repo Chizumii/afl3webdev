@@ -25,6 +25,14 @@ class User extends Authenticatable
         'password',
     ];
 
+
+
+    public function orderUsers(): HasMany{
+        return $this->hasMany(orderUser::class, 'user_id');
+    }
+}
+
+
     // /**
     //  * The attributes that should be hidden for serialization.
     //  *
@@ -47,8 +55,3 @@ class User extends Authenticatable
     //         'password' => 'hashed',
     //     ];
     // }
-
-    public function orderUsers(): HasMany{
-        return $this->hasMany(orderUser::class, 'user_id');
-    }
-}

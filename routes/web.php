@@ -53,3 +53,11 @@ Route::get('/categories/{id}/restaurants', [fusionController::class, 'show']);
 Route::get('/orderstatus', [OrderController::class, 'showOrders'])->name('orders.show');
 
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+Route::middleware('auth')->group(function () {
+    // Menampilkan form untuk mengedit profil
+    Route::get('/profile/edit', [AuthController::class, 'showEditForm'])->name('profile.edit');
+    
+    // Memperbarui profil user
+    Route::post('/profile/update', [AuthController::class, 'updateProfile'])->name('profile.update');
+});

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use App\Models\users;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -65,5 +64,39 @@ class AuthController extends Controller
     {
         Auth::logout();
         return redirect()->route('login.form'); // Redirect ke halaman login setelah logout
+    }
+    public function destroy(User $user)
+    {
+        $user->delete();
+        return redirect()->route('login.form')->with('success', 'Account deleted successfully!');
+    } // Menampilkan form untuk mengedit profile
+
+
+    public function showEditForm()
+    {
+        $user = Auth::user();  // Ambil data user yang sedang login
+        return view('editProfile', compact('user'));  // Kirim data user ke view
+    }
+
+    public function updateProfile(Request $request)
+    {
+        $user = Auth::user();  // Mendapatkan user yang sedang login
+
+        // Pastikan $user adalah instance dari model User
+        if ($user instanceof User) {
+            // Validasi dan pembaruan
+            $user->update($request->except('password')); // Update semua kolom kecuali password
+
+            // Jika password diubah, lakukan perubahan password
+            if ($request->filled('password')) {
+                $user->password = Hash::make($request->password); // Hash password baru
+                $user->save(); // Simpan perubahan password
+            }
+
+            return redirect()->route('home')->with('success', 'Profile updated successfully!');
+        }
+
+        // Jika user bukan instance dari User, beri respons error
+        return back()->withErrors(['error' => 'User not found or unauthorized']);
     }
 }
