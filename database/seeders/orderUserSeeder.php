@@ -22,6 +22,6 @@ class orderUserSeeder extends Seeder
         ]);
 
 
-        orderUser::factory(1)->create();
+        orderUser::factory(100)->create();
     }
 }

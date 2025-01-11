@@ -253,26 +253,137 @@ class menuFactory extends Factory
             'Ketupat' => 'Rice cakes wrapped in palm leaves, commonly served during holidays and eaten with dishes like satay or curry.'
         ];
 
-        // Pilih menu acak
+        $menuImages = [
+            'Pizza'=>'images/pizza.png',
+            'Burger'=>'images/burger.png',
+            'Sushi'=>'images/sushi.png',
+            'Salad'=>'images/salad.png',
+            'Curry'=>'images/curry.png',
+            'Rice'=>'images/rice.png',
+            'Noodles'=>'images/noodles.png',
+            'Fried Rice' => 'images/fried_rice.png',
+            'Steak' => 'images/steak.png',
+            'Meat' => 'images/meat.png',
+            'Vegetable' => 'images/vegetable.png',
+            'Egg' => 'images/egg.png',
+            'Fish' => 'images/fish.png',
+            'Chicken' => 'images/chicken.png',
+            'Beef' => 'images/beef.png',
+            'Pork' => 'images/pork.png',
+            'Lamb' => 'images/lamb.png',
+            'Poultry'  => 'images/poultry.png',
+            'Turkey' => 'images/turkey.png',
+            'Duck' => 'images/duck.png',
+            'Tempura' => 'images/tempura.png',
+            'Ramen' => 'images/ramen.png',
+            'Pho' => 'images/pho.png',
+            'Pad Thai' => 'images/pad_thai.png',
+            'Dim Sum' => 'images/dim_sum.png',
+            'Spring Rolls' => 'images/spring_rolls.png',
+            'Tacos' => 'images/tacos.png',
+            'Burrito' => 'images/burrito.png',
+            'Nachos' => 'images/nachos.png',
+            'Quesadilla' => 'images/quesadilla.png',
+            'Paella' => 'images/paella.png',
+            'Tapas' => 'images/tapas.png',
+            'Shawarma' => 'images/shawarma.png',
+            'Kebab' => 'images/kebab.png',
+            'Falafel' => 'images/falafel.png',
+            'Hummus' => 'images/hummus.png',
+            'Biryani' => 'images/biryani.png',
+            'Paneer' => 'images/paneer.png',
+            'Tandoori' => 'images/tandoori.png',
+            'Dosa' => 'images/dosa.png',
+            'Samosa' => 'images/samosa.png',
+            'Baklava' => 'images/baklava.png',
+            'Moussaka' => 'images/moussaka.png',
+            'Goulash' => 'images/goulash.png',
+            'Risotto' => 'images/risotto.png',
+            'Lasagna' => 'images/lasagna.png',
+            'Spaghetti' => 'images/spaghetti.png',
+            'Macaroni' => 'images/macaroni.png',
+            'Cheeseburger' => 'images/cheeseburger.png',
+            'Hotdog' => 'images/hotdog.png',
+            'Pancakes' => 'images/pancakes.png',
+            'Waffles' => 'images/waffles.png',
+            'Ice Cream' => 'images/ice cream.png',
+            'Gelato' => 'images/gelato.png',
+            'Sorbet' => 'images/sorbet.png',
+            'Pudding' => 'images/pudding.png',
+            'Cake' => 'images/cake.png',
+            'Brownie' => 'images/brownie.png',
+            'Muffin' => 'images/muffin.png',
+            'Croissant' => 'images/croissant.png',
+            'Donut' => 'images/donut.png',
+            'Bagel' => 'images/bagel.png',
+            'Sandwich' => 'images/sandwich.png',
+            'Wrap' => 'images/wrap.png',
+            'Pie' => 'images/pie.png',
+            'Quiche' => 'images/quiche.png',
+            'Soup' => 'images/soup.png',
+            'Chowder' => 'images/chowder.png',
+            'Bisque' => 'images/bisque.png',
+            'Gumbo' => 'images/gumbo.png',
+            'Stew' => 'images/stew.png',
+            'Roast' => 'images/roast.png',
+            'Grill' => 'images/grill.png',
+            'Barbecue' => 'images/barbecue.png',
+            'Fries' => 'images/fries.png',
+            'Chips' => 'images/chips.png',
+            'Popcorn' => 'images/popcorn.png',
+            'Sausage' => 'images/sausage.png',
+            'Ham' => 'images/ham.png',
+            'Bacon' => 'images/bacon.png',
+            'Omelette' => 'images/omelette.png',
+            'Scrambled Eggs' => 'images/scrambled_eggs.png',
+            'Boiled Eggs' => 'images/boiled_eggs.png',
+            'Stir Fry' => 'images/stir_fry.png',
+            'Dim Sum' => 'images/dim_sum.png',
+            'Gyoza' => 'images/gyoza.png',
+            'Baozi' => 'images/baozi.png',
+            'Okonomiyaki' => 'images/okonomiyaki.png',
+            'Takoyaki' => 'images/takoyaki.png',
+            'Satay' => 'images/satay.png',
+            'Rendang' => 'images/rendang.png',
+            'Gado-Gado' => 'images/gado-gado.png',
+            'Ketoprak' => 'images/ketoprak.png',
+            'Nasi Goreng' => 'images/nasi_goreng.png',
+            'Mie Goreng' => 'images/mie_goreng.png',
+            'Sate Ayam' => 'images/sate_ayam.png',
+            'Soto Ayam' => 'images/soto_ayam.png',
+            'Bakso' => 'images/bakso.png',
+            'Pempek' => 'images/pempek.png',
+            'Martabak' => 'images/martabak.png',
+            'Kerak Telor'   => 'images/kerak_telor.png',
+            'Es Campur' => 'images/es_campur.png',
+            'Cendol' => 'images/cendol.png',
+            'Kolak' => 'images/kolak.png',
+            'Pisang Goreng' => 'images/pisang_goreng.png',
+            'Singkong Goreng' => 'images/singkong_goreng.png',
+            'Ayam Penyet' => 'images/ayam_penyet.png',
+            'Ayam Goreng' => 'images/ayam_goreng.png',
+            'Lele Goreng' => 'images/lele_goreng.png',
+            'Sambal' => 'images/sambal.png',
+            'Gudeg' => 'images/gudeg.png',
+            'Rawon' => 'images/rawon.png',
+            'Sop Buntut' => 'images/sop_buntut.png',
+            'Lontong' => 'images/lontong.png',
+            'Ketupat' => 'images/ketupat.png'
+        ];
+
+        // Select random menus
         $selectedMenus = $this->faker->randomElements($menuName, $this->faker->numberBetween(1, 3));
 
-        // Cocokkan deskripsi
-        $selectedDescriptions = array_map(fn($menu) => $menuDescription[$menu], $selectedMenus);
-
-        // Pilih menu secara acak (1 hingga 3)
-        $selectedMenu = $this->faker->randomElements($menuName, $this->faker->numberBetween(1, 3));
-
-        // Dapatkan deskripsi yang sesuai
-        $description = array_map(function ($menu) use ($menuDescription) {
-            return $menuDescription[$menu];
-        }, $selectedMenu);
+        // Map descriptions and images
+        $selectedDescriptions = array_map(fn($menu) => $menuDescription[$menu] ?? 'Description unavailable', $selectedMenus);
+        $selectedImages = array_map(fn($menu) => $menuImages[$menu] ?? 'images/default.png', $selectedMenus);
 
         return [
             'resto_id' => resto::factory(),
             'menu_name' => implode(', ', $selectedMenus),
-            'description' => implode(', ', $selectedDescriptions), // Pastikan deskripsi sesuai dengan menu yang dipilih
+            'description' => implode(', ', $selectedDescriptions),
             'price' => $this->faker->numberBetween(60000, 300000),
-            'image' => $this->faker->imageUrl(),
+            'image' => implode(', ', $selectedImages),
         ];
     }
 }

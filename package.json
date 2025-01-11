@@ -16,6 +16,7 @@
     },
     "dependencies": {
         "factory": "^1.0.5",
+        "safe-eval": "^0.4.1",
         "seed": "^0.4.4",
         "seeder": "^0.2.1"
     }

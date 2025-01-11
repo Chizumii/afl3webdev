@@ -21,6 +21,6 @@ class orderDetailSeeder extends Seeder
             'unit' => 3, 
         ]);
 
-        orderDetail::factory(1)->create();
+        orderDetail::factory(100)->create();
     }
 }
