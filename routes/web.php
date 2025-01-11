@@ -34,7 +34,7 @@ Route::get('/restaurants', [restaurantController::class,'showRestaurants'])->nam
 Route::get('/restaurants/{id}', [RestaurantController::class, 'find'])->name('restaurants.show');
 
 Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register.form');
-// Route::post('/register', [AuthController::class, 'register'])->name('register');
+Route::post('/register', [AuthController::class, 'register'])->name('register');
 
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login.form');
 Route::post('/login', [AuthController::class, 'login'])->name('login');
@@ -52,4 +52,4 @@ Route::get('/categories/{id}/restaurants', [fusionController::class, 'show']);
 
 Route::get('/orderstatus', [OrderController::class, 'showOrders'])->name('orders.show');
 
-
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
