@@ -74,3 +74,24 @@ Route::middleware('auth')->group(function () {
     // Rute untuk menghapus item dari keranjang
     Route::post('/cart/remove', [CartController::class, 'remove'])->name('cart.remove');
 });
+
+Route::get('/admin', function () {
+    return view('admin');
+})->name('admin.dashboard');
+
+
+Route::get('/userlist', function () {
+    return view('userlist');
+})->name('userlist.show');
+
+
+
+Route::get('/orderdetailAdmin', function () {
+    return view('userlist');
+})->name('userlist.show');
+
+
+
+Route::get('/orderstatusAdmin', function () {
+    return view('userlist');
+})->name('userlist.show');

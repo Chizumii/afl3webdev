@@ -42,6 +42,7 @@
                                 class="font-medium text-[#E2CEB1] hover:underline">Sign Up here</a>
                         </p>
                     </form>
+                    
                 </div>
             </div>
         </div>
