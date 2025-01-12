@@ -27,16 +27,19 @@ class orderUser extends Model
 
 
     // penghubung relation database
-    public function users(): BelongsTo{
-        return $this->belongsTo(user::class);
+    public function users(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function orderDetails(): HasMany{
+
+
+    public function orderDetails(): HasMany
+    {
         return $this->hasMany(orderDetail::class, 'orderUser_id');
     }
     public function orderUsers()
-{
-    return $this->belongsTo(OrderUser::class, 'order_user_id');
-}
-
+    {
+        return $this->belongsTo(OrderUser::class, 'order_user_id');
+    }
 }

@@ -7,11 +7,12 @@ use App\Http\Controllers\fusionController;
 use App\Http\Controllers\fusionsController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\orderController;
+use App\Http\Controllers\orderUserAdmin;
+use App\Http\Controllers\orderUserAdminController;
 use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\restaurantController;
-
-
+use App\Models\orderUser;
 
 Route::get('/', function () {
     return view('home',[
@@ -95,3 +96,5 @@ Route::get('/orderdetailAdmin', function () {
 Route::get('/orderstatusAdmin', function () {
     return view('userlist');
 })->name('userlist.show');
+
+Route::resource("/orderstatusAdmin", orderUserAdminController::class);
