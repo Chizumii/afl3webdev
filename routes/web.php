@@ -77,6 +77,16 @@ Route::middleware('auth')->group(function () {
     Route::post('/cart/remove', [CartController::class, 'remove'])->name('cart.remove');
 });
 
+
+
+
+
+
+
+
+
+
+// ADMIN ROUTES
 Route::get('/admin', function () {
     return view('admin');
 })->name('admin.dashboard');
@@ -89,14 +99,16 @@ Route::get('/userlist', function () {
 
 
 Route::get('/orderdetailAdmin', function () {
-    return view('userlist');
-})->name('userlist.show');
+    return view('orderdetailAdmin');
+})->name('orderdetailAdmin.show');
 
 
 
 Route::get('/orderstatusAdmin', function () {
     return view('userlist');
 })->name('userlist.show');
+
+
 
 Route::resource("/orderstatusAdmin", orderUserAdminController::class);
 
