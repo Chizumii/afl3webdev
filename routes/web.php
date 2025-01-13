@@ -7,11 +7,12 @@ use App\Http\Controllers\fusionController;
 use App\Http\Controllers\fusionsController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\orderController;
+use App\Http\Controllers\orderUserAdmin;
+use App\Http\Controllers\orderUserAdminController;
 use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\restaurantController;
-
-
+use App\Models\orderUser;
 
 Route::get('/', function () {
     return view('home',[
@@ -74,3 +75,26 @@ Route::middleware('auth')->group(function () {
     // Rute untuk menghapus item dari keranjang
     Route::post('/cart/remove', [CartController::class, 'remove'])->name('cart.remove');
 });
+
+Route::get('/admin', function () {
+    return view('admin');
+})->name('admin.dashboard');
+
+
+Route::get('/userlist', function () {
+    return view('userlist');
+})->name('userlist.show');
+
+
+
+Route::get('/orderdetailAdmin', function () {
+    return view('userlist');
+})->name('userlist.show');
+
+
+
+Route::get('/orderstatusAdmin', function () {
+    return view('userlist');
+})->name('userlist.show');
+
+Route::resource("/orderstatusAdmin", orderUserAdminController::class);
