@@ -12,6 +12,7 @@ use App\Http\Controllers\orderUserAdminController;
 use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\restaurantController;
+use App\Http\Controllers\userListController;
 use App\Models\orderUser;
 
 Route::get('/', function () {
@@ -98,3 +99,5 @@ Route::get('/orderstatusAdmin', function () {
 })->name('userlist.show');
 
 Route::resource("/orderstatusAdmin", orderUserAdminController::class);
+
+Route::resource('/userlist', userListController::class);

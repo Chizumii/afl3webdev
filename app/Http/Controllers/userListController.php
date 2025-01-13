@@ -7,11 +7,11 @@ use Illuminate\Http\Request;
 
 class userListController extends Controller
 {
-    public function index(){
-        return view('userlist', 
-            [
-                'AllUser' => User::all()
-            ]
-    );
+    public function index()
+    {
+        // Mengirimkan semua data dari tabel User ke view
+        return view('userlist', [
+            'allUsers' => User::all(), // Pastikan nama key ini sama dengan di view
+        ]);
     }
 }

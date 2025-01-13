@@ -57,14 +57,6 @@
         </div>
       </nav>
   </div>
-  <div>
-    <table>
-      <thead>
-        <th></th>
-        <th>Order ID</th>
-        <th>Order Date</th>
-      </thead>
-    </table>
-  </div>
+
   </body>
 </html>
