@@ -1,109 +1,91 @@
 <x-layout>
     <x-navigation></x-navigation>
-    {{-- <form action="{{ route('logout') }}" method="POST">
-        @csrf
-        <button type="submit">Logout</button>
-    </form> --}}
+    
     <div class="carousel relative container mx-auto" style="max-width:1600px;">
         <div class="carousel-inner relative overflow-hidden w-full">
             <!--Slide 1-->
-            <input class="carousel-open" type="radio" id="carousel-1" name="carousel" aria-hidden="true" hidden=""
-                checked="checked">
-            <div class="carousel-item absolute opacity-0" style="height:91vh;">
-                <div class="block h-full w-full mx-auto flex pt-6 md:pt-0 md:items-center bg-cover bg-right"
+            <input class="carousel-open" type="radio" id="carousel-1" name="carousel" aria-hidden="true" hidden="" checked="checked">
+            <div class="carousel-item absolute opacity-0 transition-opacity duration-300" style="height:90vh;">
+                <div class="block h-full w-full mx-auto flex items-center bg-cover bg-right"
                     style="background-image: url('{{ asset('images/maknaan.png') }}');">
-                    <div class="container mx-auto">
-                        <div
-                            class="flex flex-col w-full lg:w-1/2 md:ml-16 items-center md:items-start px-6 tracking-wide">
-                            <p class="text-white text-5xl my-4">WELCOME TO KATERINGKU</p>
+                    <div class="container mx-auto px-4">
+                        <div class="flex flex-col w-full lg:w-1/2 md:ml-16 items-center md:items-start">
+                            <h1 class="text-white text-5xl font-bold mb-6">WELCOME TO KATERINGKU</h1>
                             @guest
-                                {{-- buat tampilin tombol Sign In jika pengguna belum login --}}
-                                <a class="text-xl inline-block no-underline border-b border-gray-600 leading-relaxed hover:text-black hover:border-black"
+                                <a class="text-xl px-6 py-2 bg-white text-gray-800 rounded-lg hover:bg-gray-100 transition-colors duration-200"
                                     href="/login">Sign in</a>
                             @else
-                                {{-- buat Tampilkan pesan selamat datang jika pengguna sudah login --}}
-                                <p class="text-xl text-gray-300">
+                                <p class="text-xl text-white bg-black bg-opacity-50 px-4 py-2 rounded">
                                     Hello, {{ Auth::user()->username }}! Enjoy your experience with us.
                                 </p>
                             @endguest
                         </div>
                     </div>
                 </div>
+            </div>
 
-                </div>
-                <label for="carousel-3"
-                    class="prev control-1 w-10 h-10 ml-2 md:ml-10 absolute cursor-pointer hidden text-3xl font-bold text-white hover:text-white rounded-full bg-[#A07658] hover:bg-[#E2CEB1] leading-tight text-center z-10 inset-y-0 left-0 my-auto">‹</label>
-                <label for="carousel-2"
-                    class="next control-1 w-10 h-10 mr-2 md:mr-10 absolute cursor-pointer hidden text-3xl font-bold text-white hover:text-white rounded-full bg-[#A07658] hover:bg-[#E2CEB1] leading-tight text-center z-10 inset-y-0 right-0 my-auto">›</label>
-
-                <!--Slide 2-->
-                <input class="carousel-open" type="radio" id="carousel-2" name="carousel" aria-hidden="true"
-                    hidden="">
-                <div class="carousel-item absolute opacity-0 bg-cover bg-right" style="height:91vh;">
-                    <div class="block h-full w-full mx-auto flex pt-6 md:pt-0 md:items-center bg-cover bg-right"
-                        style="background-image: url('{{ asset('images/home2.png') }}');">
-                        <div class="container mx-auto">
-                            <div
-                                class="flex flex-col w-full lg:w-1/2 md:ml-16 items-center md:items-start px-6 tracking-wide">
-                                <p class="text-white text-5xl my-4">WELCOME TO KATERINGKU</p>
-                                @guest
-                                    {{-- buat tampilin tombol Sign In jika pengguna belum login --}}
-                                    <a class="text-xl inline-block no-underline border-b border-gray-600 leading-relaxed hover:text-black hover:border-black"
-                                        href="/login">Sign in</a>
-                                @else
-                                    {{-- buat Tampilkan pesan selamat datang jika pengguna sudah login --}}
-                                    <p class="text-xl text-gray-300">
-                                        Hello, {{ Auth::user()->username }}! Enjoy your experience with us.
-                                    </p>
-                                @endguest
-                            </div>
+            <!--Slide 2-->
+            <input class="carousel-open" type="radio" id="carousel-2" name="carousel" aria-hidden="true" hidden="">
+            <div class="carousel-item absolute opacity-0 transition-opacity duration-300" style="height:90vh;">
+                <div class="block h-full w-full mx-auto flex items-center bg-cover bg-right"
+                    style="background-image: url('{{ asset('images/home2.png') }}');">
+                    <div class="container mx-auto px-4">
+                        <div class="flex flex-col w-full lg:w-1/2 md:ml-16 items-center md:items-start">
+                            <h1 class="text-white text-5xl font-bold mb-6">WELCOME TO KATERINGKU</h1>
+                            @guest
+                                <a class="text-xl px-6 py-2 bg-white text-gray-800 rounded-lg hover:bg-gray-100 transition-colors duration-200"
+                                    href="/login">Sign in</a>
+                            @else
+                                <p class="text-xl text-white bg-black bg-opacity-50 px-4 py-2 rounded">
+                                    Hello, {{ Auth::user()->username }}! Enjoy your experience with us.
+                                </p>
+                            @endguest
                         </div>
-
                     </div>
                 </div>
-                <label for="carousel-1"
-                    class="prev control-2 w-10 h-10 ml-2 md:ml-10 absolute cursor-pointer hidden text-3xl font-bold text-black hover:text-white rounded-full bg-white hover:bg-[#E2CEB1]  leading-tight text-center z-10 inset-y-0 left-0 my-auto">‹</label>
-                <label for="carousel-3"
-                    class="next control-2 w-10 h-10 mr-2 md:mr-10 absolute cursor-pointer hidden text-3xl font-bold text-black hover:text-white rounded-full bg-white hover:bg-[#E2CEB1] leading-tight text-center z-10 inset-y-0 right-0 my-auto">›</label>
+            </div>
 
-                <!--Slide 3-->
-                <input class="carousel-open" type="radio" id="carousel-3" name="carousel" aria-hidden="true"
-                    hidden="">
-                <div class="carousel-item absolute opacity-0"style="height:91vh;">
-                    <div class="block h-full w-full mx-auto flex pt-6 md:pt-0 md:items-center bg-cover bg-bottom"
-                        style="background-image: url('{{ asset('images/home3.png') }}');">
-                        <div class="container mx-auto">
-                            <div
-                                class="flex flex-col w-full lg:w-1/2 md:ml-16 items-center md:items-start px-6 tracking-wide">
-                                <p class="text-white text-2xl my-4">Enjoy Our Menu</p>
-                                <a class="text-xl inline-block no-underline border-b border-gray-600 leading-relaxed hover:text-black hover:border-black"
-                                    href="#">view product</a>
-                            </div>
+            <!--Slide 3-->
+            <input class="carousel-open" type="radio" id="carousel-3" name="carousel" aria-hidden="true" hidden="">
+            <div class="carousel-item absolute opacity-0 transition-opacity duration-300" style="height:90vh;">
+                <div class="block h-full w-full mx-auto flex items-center bg-cover bg-bottom"
+                    style="background-image: url('{{ asset('images/home3.png') }}');">
+                    <div class="container mx-auto px-4">
+                        <div class="flex flex-col w-full lg:w-1/2 md:ml-16 items-center md:items-start">
+                            <h2 class="text-white text-4xl font-bold mb-6">Enjoy Our Menu</h2>
+                            <a class="text-xl px-6 py-2 bg-white text-gray-800 rounded-lg hover:bg-gray-100 transition-colors duration-200"
+                                href="#">View Products</a>
                         </div>
-
                     </div>
                 </div>
-                <label for="carousel-2"
-                    class="prev control-3 w-10 h-10 ml-2 md:ml-10 absolute cursor-pointer hidden text-3xl font-bold text-black hover:text-white rounded-full bg-white hover:bg-[#E2CEB1]  leading-tight text-center z-10 inset-y-0 left-0 my-auto">‹</label>
-                <label for="carousel-1"
-                    class="next control-3 w-10 h-10 mr-2 md:mr-10 absolute cursor-pointer hidden text-3xl font-bold text-black hover:text-white rounded-full bg-white hover:bg-[#E2CEB1]  leading-tight text-center z-10 inset-y-0 right-0 my-auto">›</label>
+            </div>
 
-                <!-- Add additional indicators for each slide-->
-                <ol class="carousel-indicators">
-                    <li class="inline-block mr-3">
-                        <label for="carousel-1"
-                            class="carousel-bullet cursor-pointer block text-4xl text-gray-400 hover:text-gray-900">•</label>
-                    </li>
-                    <li class="inline-block mr-3">
-                        <label for="carousel-2"
-                            class="carousel-bullet cursor-pointer block text-4xl text-gray-400 hover:text-gray-900">•</label>
-                    </li>
-                    <li class="inline-block mr-3">
-                        <label for="carousel-3"
-                            class="carousel-bullet cursor-pointer block text-4xl text-gray-400 hover:text-gray-900">•</label>
-                    </li>
-                </ol>
+            <!-- Navigation Arrows -->
+            <div class="absolute inset-y-0 left-0 flex items-center">
+                <label for="carousel-3" class="prev control-1 cursor-pointer ml-4 bg-white bg-opacity-70 hover:bg-opacity-100 rounded-full p-3 transition-all duration-200">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                    </svg>
+                </label>
+            </div>
+            <div class="absolute inset-y-0 right-0 flex items-center">
+                <label for="carousel-2" class="next control-1 cursor-pointer mr-4 bg-white bg-opacity-70 hover:bg-opacity-100 rounded-full p-3 transition-all duration-200">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                </label>
+            </div>
+
+            <!-- Indicators -->
+            <div class="absolute bottom-0 w-full flex justify-center pb-4">
+                <div class="flex space-x-3">
+                    <label for="carousel-1" class="carousel-bullet w-3 h-3 rounded-full bg-white bg-opacity-50 hover:bg-opacity-100 cursor-pointer transition-all duration-200"></label>
+                    <label for="carousel-2" class="carousel-bullet w-3 h-3 rounded-full bg-white bg-opacity-50 hover:bg-opacity-100 cursor-pointer transition-all duration-200"></label>
+                    <label for="carousel-3" class="carousel-bullet w-3 h-3 rounded-full bg-white bg-opacity-50 hover:bg-opacity-100 cursor-pointer transition-all duration-200"></label>
+                </div>
             </div>
         </div>
-        <x-footer />
+    </div>
+
+    <x-footer />
 </x-layout>
