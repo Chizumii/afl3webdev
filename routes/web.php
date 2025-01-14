@@ -5,11 +5,15 @@ use App\Http\Controllers\cartController;
 use App\Http\Controllers\categoryController;
 use App\Http\Controllers\fusionController;
 use App\Http\Controllers\fusionsController;
+use App\Http\Controllers\menuAdminController;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\menuDateAdminController;
 use App\Http\Controllers\orderController;
+use App\Http\Controllers\orderDetailAdminController;
 use App\Http\Controllers\orderUserAdmin;
 use App\Http\Controllers\orderUserAdminController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\restaurantAdminController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\restaurantController;
 use App\Http\Controllers\userListController;
@@ -91,6 +95,17 @@ Route::get('/admin', function () {
     return view('admin');
 })->name('admin.dashboard');
 
+Route::get('/restaurantAdmin', function () {
+    return view('restaurantAdmin');
+})->name('restaurantAdmin.show');
+
+Route::get('/menuAdmin', function () {
+    return view('menuAdmin');
+})->name('menuAdmin.show');
+
+Route::get('/menuDateAdmin', function () {
+    return view('menuDateAdmin');
+})->name('menuDateAdmin.show');
 
 Route::get('/userlist', function () {
     return view('userlist');
@@ -109,7 +124,16 @@ Route::get('/orderstatusAdmin', function () {
 })->name('userlist.show');
 
 
+Route::resource('/userlist', userListController::class);
+
+Route::resource('/menuAdmin', menuAdminController::class);
 
 Route::resource("/orderstatusAdmin", orderUserAdminController::class);
 
-Route::resource('/userlist', userListController::class);
+Route::resource('/orderdetailAdmin', orderDetailAdminController::class);
+
+Route::resource('/menuDateAdmin', menuDateAdminController::class);
+
+Route::resource('/restaurantAdmin', restaurantAdminController::class);
+
+Route::get('/orderdetails', [orderDetailAdminController::class, 'index'])->name('orderdetails.index');
