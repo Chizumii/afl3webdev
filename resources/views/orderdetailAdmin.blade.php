@@ -26,7 +26,10 @@
                     </th>
                     <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider">
                         Unit
-                        </th>
+                    </th>
+                    <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider">
+                        Menu Ordered
+                    </th>
                     <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider">
                         Delivery Status
                     </th>
@@ -40,10 +43,13 @@
                         {{ $detail->orderUser->users->username ?? 'N/A' }}
                     </td>
                     <td class="px-6 py-4 text-sm text-gray-800">
-                        Rp{{ number_format($detail->orderUser->total_price, 2) ?? 'N/A' }}
+                        Rp {{number_format($detail->orderUser->total_price ?? 'N/A', 2) }}
                     </td>
                     <td class="px-6 py-4 text-sm text-gray-800">
                         {{ $detail->unit ?? 'N/A' }}
+                    </td>
+                    <td class="px-6 py-4 text-sm text-gray-800">
+                        {{ $detail->menuDates->menus->menu_name ?? 'N/A' }}
                     </td>
                     <td class="flex justify-end px-6 py-4 text-sm text-gray-800">
                         <form action="{{ route('orderDetails.updateStatus', $detail->id) }}" method="POST">
@@ -64,12 +70,13 @@
                 </tr>
                 @empty
                 <tr>
-                    <td colspan="4" class="px-6 py-4 text-center text-sm text-gray-500">
+                    <td colspan="6" class="px-6 py-4 text-center text-sm text-gray-500">
                         No order details available.
                     </td>
                 </tr>
                 @endforelse
             </tbody>
+            
         </table>
     </div>
     
