@@ -81,49 +81,53 @@ class OrderController extends Controller
         return response()->json(['cart' => $cart]);
     }
     public function confirmPayment(Request $request)
-{
-    $cart = session('cart', []);
-    
-    if (empty($cart)) {
-        return redirect()->back()->with('error', 'Your cart is empty.');
-    }
+    {
+        $cart = session('cart', []);
+        
+        if (empty($cart)) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Your cart is empty.'
+            ], 400);
+        }
 
-    try {
-        DB::transaction(function () use ($cart) {
-            // Create the order user record first
-            $orderUser = orderUser::create([
-                'user_id' => Auth::id(),
-                'totalPrice' => collect($cart)->sum(fn($item) => $item['price'] * $item['quantity']),
-                'date' => now(),
-                'isPaymentStatus' => true
+        try {
+            DB::transaction(function () use ($cart) {
+                // Create the order user record first
+                $orderUser = orderUser::create([
+                    'user_id' => Auth::id(),
+                    'totalPrice' => collect($cart)->sum(fn($item) => $item['price'] * $item['quantity']),
+                    'date' => now(),
+                    'isPaymentStatus' => true
+                ]);
+
+                // Create order details for each cart item
+                foreach ($cart as $cartItem) {
+                    OrderDetail::create([
+                        'menu_date_id' => $cartItem['menu_date_id'], // Fixed field name
+                        'price' => $cartItem['price'],
+                        'unit' => $cartItem['quantity'],
+                        'delivery_status_id' => 1, // Fixed field name
+                        'order_user_id' => $orderUser->id // Fixed field name
+                    ]);
+                }
+            });
+
+            // Clear the cart after successful order
+            session()->forget('cart');
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Order placed successfully!'
             ]);
 
-            // Create order details for each cart item
-            foreach ($cart as $cartItem) {
-                OrderDetail::create([
-                    'menuDate_id' => $cartItem['menu_date_id'],
-                    'price' => $cartItem['price'],
-                    'unit' => $cartItem['quantity'],
-                    'deliveryStat_id' => 1, // Initial delivery status
-                    'orderUser_id' => $orderUser->id
-                ]);
-            }
-        });
-
-        // Clear the cart after successful order
-        session()->forget('cart');
-
-        return response()->json([
-            'success' => true,
-            'message' => 'Order placed successfully!'
-        ]);
-
-    } catch (\Exception $e) {
-        return response()->json([
-            'success' => false,
-            'message' => 'Error processing your order. Please try again.'
-        ], 500);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Error processing your order: ' . $e->getMessage()
+            ], 500);
+        }
     }
-}
+
     
 }

@@ -68,16 +68,18 @@
                         id="total-items">{{ session('cart') ? collect(session('cart'))->sum('quantity') : 0 }}</span>
                 </div>
 
-                <form onsubmit="event.preventDefault();" class="inline">
+                <form id="payment-form" class="w-full" onsubmit="event.preventDefault(); confirmPayment();">
                     @csrf
-                    <button type="button" onclick="confirmPayment()"
-                        class="w-full bg-[#b9945d] text-white py-3 rounded-lg hover:bg-[#8d642b] transition-all duration-300 flex items-center justify-center gap-2 mt-4">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
-                            stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-                        </svg>
-                        Confirm Payment
+                    <button type="submit" id="confirm-payment-btn"
+                        class="w-full bg-[#b9945d] text-white py-3 rounded-lg hover:bg-[#8d642b] transition-all duration-300 flex items-center justify-center gap-2 mt-4 disabled:opacity-50 disabled:cursor-not-allowed">
+                        <span class="flex items-center gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                            </svg>
+                            <span class="button-text">Confirm Payment</span>
+                        </span>
                     </button>
                 </form>
 
@@ -90,54 +92,88 @@
     </footer>
 </x-layout>
 <script>
-   function confirmPayment() {
-    const button = event.target;
-    const originalContent = button.innerHTML;
-    
-    // Show loading state
-    button.innerHTML = '<svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>';
-    button.disabled = true;
-
-    // Submit form
-    fetch('{{ route('confirmPayment') }}', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-CSRF-TOKEN': '{{ csrf_token() }}'
-        }
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        return response.json();
-    })
-    .then(data => {
-        // Show success message
-        const notification = document.createElement('div');
-        notification.className = 'fixed bottom-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg';
-        notification.textContent = 'Order confirmed successfully!';
-        document.body.appendChild(notification);
-
-        // Redirect to order status page after short delay
-        setTimeout(() => {
-            window.location.href = '{{ route('orderstatus') }}';
-        }, 1500);
-    })
-    .catch(error => {
-        console.error('Error:', error);
+    function confirmPayment() {
+        const button = document.getElementById('confirm-payment-btn');
+        const buttonText = button.querySelector('.button-text');
+        const originalContent = buttonText.innerHTML;
         
-        // Show error message
-        const notification = document.createElement('div');
-        notification.className = 'fixed bottom-4 right-4 bg-red-500 text-white px-6 py-3 rounded-lg shadow-lg';
-        notification.textContent = 'Error processing your order. Please try again.';
-        document.body.appendChild(notification);
-
-        // Reset button
-        button.innerHTML = originalContent;
-        button.disabled = false;
-    });
-}
+        // Disable button and show loading state
+        button.disabled = true;
+        buttonText.innerHTML = 'Processing...';
+        
+        fetch('{{ route('confirmPayment') }}', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            }
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            // Create success notification
+            const notification = document.createElement('div');
+            notification.className = 'fixed bottom-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50 animate-fade-in';
+            notification.textContent = 'Order confirmed successfully!';
+            document.body.appendChild(notification);
+    
+            // Remove notification after 3 seconds
+            setTimeout(() => {
+                notification.classList.add('animate-fade-out');
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
+    
+            // Redirect to order status page after 1.5 seconds
+            setTimeout(() => {
+                window.location.href = '{{ route('orderstatus') }}';
+            }, 1500);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            
+            // Reset button state
+            button.disabled = false;
+            buttonText.innerHTML = originalContent;
+            
+            // Show error notification
+            const notification = document.createElement('div');
+            notification.className = 'fixed bottom-4 right-4 bg-red-500 text-white px-6 py-3 rounded-lg shadow-lg z-50 animate-fade-in';
+            notification.textContent = 'Error processing your order. Please try again.';
+            document.body.appendChild(notification);
+    
+            // Remove notification after 3 seconds
+            setTimeout(() => {
+                notification.classList.add('animate-fade-out');
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
+        });
+    }
+    
+    // Add these CSS animations to your stylesheet or in a style tag
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes fade-in {
+            from { opacity: 0; transform: translateY(1rem); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fade-out {
+            from { opacity: 1; transform: translateY(0); }
+            to { opacity: 0; transform: translateY(1rem); }
+        }
+        .animate-fade-in {
+            animation: fade-in 0.3s ease-out;
+        }
+        .animate-fade-out {
+            animation: fade-out 0.3s ease-out;
+        }
+    `;
+    document.head.appendChild(style);
+    </script>
+    <script>
     // Function to update the cart UI dynamically
     function updateCartUI(cart) {
         const cartItemsContainer = document.getElementById('cart-items');
