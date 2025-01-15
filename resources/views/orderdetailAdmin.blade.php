@@ -77,3 +77,14 @@
 </body>
 
 </html>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Simpan posisi scroll sebelum halaman reload
+        window.scrollTo(0, sessionStorage.getItem("scrollPosition") || 0);
+
+        window.addEventListener("beforeunload", function () {
+            sessionStorage.setItem("scrollPosition", window.scrollY);
+        });
+    });
+</script>
