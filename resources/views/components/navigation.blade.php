@@ -40,12 +40,14 @@
                     </div>
                 </div>
 
-                <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0 space-x-1">
-                    <button type="button" id="user-menu-button" class="relative flex px-6 text-sm"
-                        onclick="window.location.href='/cart';">
-                        <img class="h-8 w-8" src="images/Vector.svg" alt="cart">
+                <div
+                    class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0 space-x-1">
+                    <button type="button" id="user-menu-button" class="relative flex px-4 text-sm" onclick="window.location.href='/cart';" style="color: #A07658;">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="#A07658">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                        </svg>
                     </button>
-
                     
                     @auth
                         <div class="text-sm font-medium text-gray-900 ml-2">
@@ -63,7 +65,7 @@
                                 fill="#A07658" />
                         </svg>
                     </button>
-                    
+
                     <form action="{{ route('logout') }}" method="POST" id="logout-form">
                         @csrf
                         <button type="submit" class="relative flex px-6 text-sm">
@@ -71,10 +73,10 @@
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path
                                     d="M9.91699 9.80641V7.34289C9.91699 5.20503 9.91699 4.13611 10.6035 3.53824C11.29 2.94037 12.3488 3.08718 14.4664 3.38079L24.5744 4.78233C27.0414 5.1244 28.2749 5.29543 29.0126 6.14246C29.7503 6.9895 29.7503 8.23482 29.7503 10.7255V22.2745C29.7503 24.7652 29.7503 26.0105 29.0126 26.8575C28.2749 27.7046 27.0414 27.8756 24.5744 28.2177L14.4664 29.6192C12.3488 29.9128 11.29 30.0596 10.6035 29.4618C9.91699 28.8639 9.91699 27.795 9.91699 25.6571V23.4657"
-                                    stroke="black" />
+                                    stroke="#A07658" />
                                 <path
                                     d="M22.667 16.5L23.0528 16.182L23.3149 16.5L23.0528 16.818L22.667 16.5ZM5.66699 17C5.39085 17 5.16699 16.7761 5.16699 16.5C5.16699 16.2239 5.39085 16 5.66699 16V17ZM17.3862 9.30698L23.0528 16.182L22.2812 16.818L16.6145 9.94302L17.3862 9.30698ZM23.0528 16.818L17.3862 23.693L16.6145 23.057L22.2812 16.182L23.0528 16.818ZM22.667 17H5.66699V16H22.667V17Z"
-                                    fill="black" />
+                                    fill="#A07658" />
                             </svg>
                         </button>
                     </form>

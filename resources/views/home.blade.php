@@ -1,7 +1,7 @@
 <x-layout>
     <x-navigation></x-navigation>
     
-    <div class="carousel relative container mx-auto" style="max-width:1600px;">
+    <div class="carousel relative container mx-auto" style="max-width:100%;">
         <div class="carousel-inner relative overflow-hidden w-full">
             <!--Slide 1-->
             <input class="carousel-open" type="radio" id="carousel-1" name="carousel" aria-hidden="true" hidden="" checked="checked">
