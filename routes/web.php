@@ -56,6 +56,7 @@ Route::get('/categories/{id}/restaurants', [fusionController::class, 'show']);
 
 Route::get('/orderstatus', [OrderController::class, 'showOrders'])->name('orders.show');
 
+
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 
