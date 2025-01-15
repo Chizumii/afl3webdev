@@ -135,5 +135,3 @@ Route::resource('/orderdetailAdmin', orderDetailAdminController::class);
 Route::resource('/menuDateAdmin', menuDateAdminController::class);
 
 Route::resource('/restaurantAdmin', restaurantAdminController::class);
-
-Route::get('/orderdetails', [orderDetailAdminController::class, 'index'])->name('orderdetails.index');
