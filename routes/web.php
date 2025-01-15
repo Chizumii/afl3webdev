@@ -42,14 +42,16 @@ Route::get('/home', function () {
     return view('home'); 
 })->name('home')->middleware('auth'); 
 
+Route::get('/orderstatus', [OrderController::class, 'showOrders'])->name('orderstatus');
+Route::post('/confirm-payment', [OrderController::class, 'confirmPayment'])->name('confirmPayment');
+Route::get('/order-status/{order}', [OrderController::class, 'orderStatus'])->name('orderstatus');
+
 Route::get('/fusion', [categoryController::class, 'showAllCategory']);
 Route::get('/menu', [MenuController::class, 'index'])->name('menu.index');
 
 Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add');
 
 Route::get('/categories/{id}/restaurants', [fusionController::class, 'show']);
-
-Route::get('/orderstatus', [OrderController::class, 'showOrders'])->name('orders.show');
 
 
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
