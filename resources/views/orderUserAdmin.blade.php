@@ -32,7 +32,7 @@
                         <tr class="hover:bg-gray-100">
                             <td class="border px-4 py-2">{{ $order->id }}</td>
                             <td class="border px-4 py-2">{{ $order->user_id }}</td>
-                            <td class="border px-4 py-2">{{ $order->total_price }}</td>
+                            <td class="border px-4 py-2">Rp {{number_format($order->total_price, 2) }}</td>
                             <td class="border px-4 py-2">{{ $order->date }}</td>
                             <td class="border px-4 py-2">
                                 @if ($order->users)
