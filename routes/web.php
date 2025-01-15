@@ -47,9 +47,8 @@ Route::get('/home', function () {
     return view('home'); 
 })->name('home')->middleware('auth'); 
 
-Route::post('/confirm-payment', [OrderController::class, 'confirmPayment'])->name('confirmPayment');
+Route::post('/orderstatus', [OrderController::class, 'confirmPayment'])->name('confirmPayment');
 Route::get('/orderstatus', [OrderController::class, 'showOrders'])->name('orderstatus');
-Route::delete('/orders/{orderId}', [OrderController::class, 'deleteOrder'])->name('order.delete');
 
 Route::get('/fusion', [categoryController::class, 'showAllCategory']);
 Route::get('/menu', [MenuController::class, 'index'])->name('menu.index');

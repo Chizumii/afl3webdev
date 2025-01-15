@@ -3,42 +3,35 @@
 namespace App\Http\Controllers;
 
 use App\Models\OrderDetail;
-use App\Models\orderUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
 class OrderController extends Controller
 {
     public function showOrders()
-    {
-        $userId = Auth::id();
-    
-        $orders = OrderUser::with(['orderDetails.menuDates.menu', 'orderDetails.deliveryStatuses'])
-            ->where('user_id', $userId)
-            ->orderBy('created_at', 'desc')
-            ->get()
-            ->map(function ($order) {
-                return [
-                    'id' => $order->id,
-                    'date' => $order->date,
-                    'totalPrice' => $order->totalPrice,
-                    'paymentStatus' => $order->isPaymentStatus,
-                    'items' => $order->orderDetails->map(function ($detail) {
-                        return [
-                            'menu_name' => $detail->menuDates->menu->menu_name,
-                            'price' => $detail->price,
-                            'quantity' => $detail->unit,
-                            'subtotal' => $detail->price * $detail->unit,
-                            'deliveryStatus' => $detail->deliveryStatuses->status_name ?? 'Pending'
-                        ];
-                    })
-                ];
-            });
-    
-        return view('orderstatus', compact('orders'));
-    }
+{
+    $userId = Auth::id();
+
+    $orderDetails = OrderDetail::with(['menuDates.menus', 'orderUsers', 'deliveryStatuses'])
+        ->whereHas('orderUsers', function ($query) use ($userId) {
+            $query->where('user_id', $userId);
+        })
+        ->get()
+        ->map(function ($orderDetail) {
+            return [
+                'id' => $orderDetail->id,
+                'paymentStatus' => $orderDetail->orderUsers->isPaymentStatus ?? false,
+                'deliveryStatus' => $orderDetail->deliveryStatuses->status_name ?? 'Status Not Found',
+                'price' => $orderDetail->price,
+                'unit' => $orderDetail->unit,
+                'date' => $orderDetail->orderUsers->date ?? null,
+                'totalPrice' => $orderDetail->price * $orderDetail->unit,
+            ];
+        });
+
+    return view('orderstatus', compact('orderDetails'));
+}
 
     public function showCart()
     {
@@ -85,49 +78,25 @@ class OrderController extends Controller
         $cart = session('cart', []);
         
         if (empty($cart)) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Your cart is empty.'
-            ], 400);
+            return redirect()->back()->with('error', 'Your cart is empty.');
         }
-
-        try {
-            DB::transaction(function () use ($cart) {
-                // Create the order user record first
-                $orderUser = orderUser::create([
-                    'user_id' => Auth::id(),
-                    'totalPrice' => collect($cart)->sum(fn($item) => $item['price'] * $item['quantity']),
-                    'date' => now(),
-                    'isPaymentStatus' => true
-                ]);
-
-                // Create order details for each cart item
-                foreach ($cart as $cartItem) {
-                    OrderDetail::create([
-                        'menu_date_id' => $cartItem['menu_date_id'], // Fixed field name
-                        'price' => $cartItem['price'],
-                        'unit' => $cartItem['quantity'],
-                        'delivery_status_id' => 1, // Fixed field name
-                        'order_user_id' => $orderUser->id // Fixed field name
-                    ]);
-                }
-            });
-
-            // Clear the cart after successful order
-            session()->forget('cart');
-
-            return response()->json([
-                'success' => true,
-                'message' => 'Order placed successfully!'
+    
+        // Process cart data to save in the database
+        foreach ($cart as $cartItem) {
+            OrderDetail::create([
+                'menu_date_id' => $cartItem['menu_date_id'],
+                'price' => $cartItem['price'], 
+                'deliveryStat_id' => 1,
+                'unit' => $cartItem['quantity'],
+                'user_id' => Auth::id()
             ]);
-
-        } catch (\Exception $e) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Error processing your order: ' . $e->getMessage()
-            ], 500);
         }
+    
+        // Clear the cart after saving
+        session()->forget('cart');
+    
+        return redirect()->route('orderstatus')
+            ->with('success', 'Payment confirmed! Your order has been placed.');
     }
-
     
 }
