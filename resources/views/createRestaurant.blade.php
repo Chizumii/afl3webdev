@@ -11,30 +11,28 @@
 
 <body>
     <x-navigationAdmin></x-navigationAdmin>
-    <form action="{{ route('restaurantAdmin.update', $restaurant->id) }}" method="POST"
+    <form action="{{ route('restaurantAdmin.store') }}" method="POST"
         class="max-w-lg mx-auto p-6 bg-white shadow-md rounded-lg">
         @csrf
-        @method('PUT')
         <h2 class="text-2xl font-semibold mb-6 text-center text-gray-800">Edit Restaurant</h2>
 
         <div class="mb-4">
             <label for="resto_name" class="block text-gray-700 text-sm font-bold mb-2">Restaurant Name</label>
             <input type="text" name="resto_name" id="resto_name"
-                value="{{ old('resto_name', $restaurant->resto_name) }}"
                 class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 placeholder="Enter restaurant name" required>
         </div>
 
         <div class="mb-4">
             <label for="address" class="block text-gray-700 text-sm font-bold mb-2">Address</label>
-            <input type="text" name="address" id="address" value="{{ old('address', $restaurant->address) }}"
+            <input type="text" name="address" id="address" 
                 class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 placeholder="Enter address" required>
         </div>
 
         <div class="mb-4">
             <label for="number" class="block text-gray-700 text-sm font-bold mb-2">Phone Number</label>
-            <input type="text" name="number" id="number" value="{{ old('number', $restaurant->number) }}"
+            <input type="text" name="number" id="number" 
                 class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 placeholder="Enter phone number" required>
         </div>
@@ -42,7 +40,7 @@
         <div class="flex justify-center">
             <button type="submit"
                 class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-6 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-                Update
+                Create
             </button>
         </div>
     </form>
