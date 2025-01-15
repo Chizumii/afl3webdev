@@ -48,6 +48,7 @@
                                             d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                                     </svg>
                                 </button>
+
                             </form>
                         </div>
                     </div>
@@ -96,63 +97,65 @@
         const button = document.getElementById('confirm-payment-btn');
         const buttonText = button.querySelector('.button-text');
         const originalContent = buttonText.innerHTML;
-        
+
         // Disable button and show loading state
         button.disabled = true;
         buttonText.innerHTML = 'Processing...';
-        
+
         fetch('{{ route('confirmPayment') }}', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': '{{ csrf_token() }}'
-            }
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then(data => {
-            // Create success notification
-            const notification = document.createElement('div');
-            notification.className = 'fixed bottom-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50 animate-fade-in';
-            notification.textContent = 'Order confirmed successfully!';
-            document.body.appendChild(notification);
-    
-            // Remove notification after 3 seconds
-            setTimeout(() => {
-                notification.classList.add('animate-fade-out');
-                setTimeout(() => notification.remove(), 300);
-            }, 3000);
-    
-            // Redirect to order status page after 1.5 seconds
-            setTimeout(() => {
-                window.location.href = '{{ route('orderstatus') }}';
-            }, 1500);
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            
-            // Reset button state
-            button.disabled = false;
-            buttonText.innerHTML = originalContent;
-            
-            // Show error notification
-            const notification = document.createElement('div');
-            notification.className = 'fixed bottom-4 right-4 bg-red-500 text-white px-6 py-3 rounded-lg shadow-lg z-50 animate-fade-in';
-            notification.textContent = 'Error processing your order. Please try again.';
-            document.body.appendChild(notification);
-    
-            // Remove notification after 3 seconds
-            setTimeout(() => {
-                notification.classList.add('animate-fade-out');
-                setTimeout(() => notification.remove(), 300);
-            }, 3000);
-        });
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                }
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                // Create success notification
+                const notification = document.createElement('div');
+                notification.className =
+                    'fixed bottom-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50 animate-fade-in';
+                notification.textContent = 'Order confirmed successfully!';
+                document.body.appendChild(notification);
+
+                // Remove notification after 3 seconds
+                setTimeout(() => {
+                    notification.classList.add('animate-fade-out');
+                    setTimeout(() => notification.remove(), 300);
+                }, 3000);
+
+                // Redirect to order status page after 1.5 seconds
+                setTimeout(() => {
+                    window.location.href = '{{ route('orderstatus') }}';
+                }, 1500);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+
+                // Reset button state
+                button.disabled = false;
+                buttonText.innerHTML = originalContent;
+
+                // Show error notification
+                const notification = document.createElement('div');
+                notification.className =
+                    'fixed bottom-4 right-4 bg-red-500 text-white px-6 py-3 rounded-lg shadow-lg z-50 animate-fade-in';
+                notification.textContent = 'Error processing your order. Please try again.';
+                document.body.appendChild(notification);
+
+                // Remove notification after 3 seconds
+                setTimeout(() => {
+                    notification.classList.add('animate-fade-out');
+                    setTimeout(() => notification.remove(), 300);
+                }, 3000);
+            });
     }
-    
+
     // Add these CSS animations to your stylesheet or in a style tag
     const style = document.createElement('style');
     style.textContent = `
@@ -171,5 +174,41 @@
             animation: fade-out 0.3s ease-out;
         }
     `;
+    document.querySelectorAll('.remove-item-button').forEach(button => {
+        button.addEventListener('click', function(event) {
+            const itemId = this.dataset.id;
+
+            fetch('{{ route('cart.remove') }}', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    },
+                    body: JSON.stringify({
+                        id: itemId
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.cart) {
+                        // Update the cart UI
+                        document.getElementById('cart-items').innerHTML = '';
+                        data.cart.forEach(item => {
+                            // Update each cart item (This would need to be done dynamically)
+                        });
+
+                        // Optionally, show success message or update total
+                        alert(data.message);
+                    } else {
+                        alert('Failed to remove item.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('An error occurred while removing the item.');
+                });
+        });
+    });
+
     document.head.appendChild(style);
-    </script>
+</script>
