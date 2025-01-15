@@ -67,11 +67,11 @@
                         id="total-items">{{ session('cart') ? collect(session('cart'))->sum('quantity') : 0 }}</span>
                 </div>
 
-                <a href="#" onclick="confirmPayment()"
-   class="bg-[#ebc892] text-black px-8 py-2 rounded-full font-normal hover:bg-[#d4b788] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-   {{ session('cart') && count(session('cart')) > 0 ? '' : 'disabled' }}>
-    Confirm Payment
-</a>
+                <a href="/orderstatus" onclick="confirmPayment()"
+                    class="bg-[#ebc892] text-black px-8 py-2 rounded-full font-normal hover:bg-[#d4b788] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                    {{ session('cart') && count(session('cart')) > 0 ? '' : 'disabled' }}>
+                    Confirm Payment
+                </a>
 
 
 
@@ -154,6 +154,8 @@
             }
         }
     </script>
+
+
 
     <!--untuk update item quantity cart ketika add to cart dari menu-->
     <script>

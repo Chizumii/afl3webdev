@@ -35,4 +35,5 @@ class orderController extends Controller
 
         return view('orderstatus', compact('orderDetails'));
     }
+    
 }
