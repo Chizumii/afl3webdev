@@ -26,9 +26,12 @@
                     </th>
                     <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider">
                         Unit
-                        </th>
+                    </th>
                     <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider">
                         Delivery Status
+                    </th>
+                    <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider">
+                        Action
                     </th>
                 </tr>
             </thead>
@@ -40,16 +43,20 @@
                         {{ $detail->orderUser->users->username ?? 'N/A' }}
                     </td>
                     <td class="px-6 py-4 text-sm text-gray-800">
-                        {{ $detail->orderUser->total_price ?? 'N/A' }}
+                        ${{ number_format($detail->orderUser->total_price, 2) ?? 'N/A' }}
                     </td>
                     <td class="px-6 py-4 text-sm text-gray-800">
                         {{ $detail->unit ?? 'N/A' }}
                     </td>
+                    <td class="px-6 py-4 text-sm text-gray-800">
+                        {{ $detail->deliveryStatus->status_name ?? 'Not Set' }}
+                    </td>
                     <td class="flex justify-end px-6 py-4 text-sm text-gray-800">
-                        <form action="{{ route('orderDetails.updateStatus', $detail->id) }}" method="POST">
+                        <form action="{{ route('orderDetails.updateStatus', $detail->id) }}" method="POST" class="inline-block">
                             @csrf
                             @method('PATCH')
-                            <select name="delivery_status_id" class="border rounded-md px-2 py-1 text-sm text-gray-800">
+                            <label for="delivery_status_{{ $detail->id }}" class="sr-only">Update Delivery Status</label>
+                            <select id="delivery_status_{{ $detail->id }}" name="delivery_status_id" class="border rounded-md px-2 py-1 text-sm text-gray-800">
                                 @foreach ($deliveryStatuses as $status)
                                     <option value="{{ $status->id }}" {{ $detail->delivery_status_id == $status->id ? 'selected' : '' }}>
                                         {{ $status->status_name }}
@@ -59,12 +66,12 @@
                             <button type="submit" class="ml-2 text-white bg-blue-500 hover:bg-blue-600 px-4 py-2 rounded-md">
                                 Update
                             </button>
-                        </form>                        
+                        </form>
                     </td>
                 </tr>
                 @empty
                 <tr>
-                    <td colspan="4" class="px-6 py-4 text-center text-sm text-gray-500">
+                    <td colspan="6" class="px-6 py-4 text-center text-sm text-gray-500">
                         No order details available.
                     </td>
                 </tr>
@@ -72,19 +79,17 @@
             </tbody>
         </table>
     </div>
-    
 
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Save the scroll position before the page reloads
+            window.scrollTo(0, sessionStorage.getItem("scrollPosition") || 0);
+
+            window.addEventListener("beforeunload", function () {
+                sessionStorage.setItem("scrollPosition", window.scrollY);
+            });
+        });
+    </script>
 </body>
 
 </html>
-
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        // Simpan posisi scroll sebelum halaman reload
-        window.scrollTo(0, sessionStorage.getItem("scrollPosition") || 0);
-
-        window.addEventListener("beforeunload", function () {
-            sessionStorage.setItem("scrollPosition", window.scrollY);
-        });
-    });
-</script>

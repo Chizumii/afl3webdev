@@ -86,55 +86,43 @@ Route::middleware('auth')->group(function () {
 
 
 
+// ADMIN ROUTES - Wrapped in 'auth' middleware
+Route::middleware(['auth'])->group(function () {
+    Route::get('/admin', function () {
+        return view('admin');
+    })->name('admin.dashboard');
 
+    Route::get('/restaurantAdmin', function () {
+        return view('restaurantAdmin');
+    })->name('restaurantAdmin.show');
 
+    Route::get('/menuAdmin', function () {
+        return view('menuAdmin');
+    })->name('menuAdmin.show');
 
-// ADMIN ROUTES
-Route::get('/admin', function () {
-    return view('admin');
-})->name('admin.dashboard');
+    Route::get('/menuDateAdmin', function () {
+        return view('menuDateAdmin');
+    })->name('menuDateAdmin.show');
 
-Route::get('/restaurantAdmin', function () {
-    return view('restaurantAdmin');
-})->name('restaurantAdmin.show');
+    Route::get('/userlist', function () {
+        return view('userlist');
+    })->name('userlist.show');
 
-Route::get('/menuAdmin', function () {
-    return view('menuAdmin');
-})->name('menuAdmin.show');
+    Route::get('/orderdetailAdmin', function () {
+        return view('orderdetailAdmin');
+    })->name('orderdetailAdmin.show');
 
-Route::get('/menuDateAdmin', function () {
-    return view('menuDateAdmin');
-})->name('menuDateAdmin.show');
+    Route::get('/orderstatusAdmin', function () {
+        return view('userlist');
+    })->name('userlist.show');
 
-Route::get('/userlist', function () {
-    return view('userlist');
-})->name('userlist.show');
+    Route::resource('/userlist', userListController::class);
+    Route::resource('/menuAdmin', menuAdminController::class);
+    Route::resource("/orderstatusAdmin", orderUserAdminController::class);
+    Route::resource('/orderdetailAdmin', orderDetailAdminController::class);
+    Route::resource('/menuDateAdmin', menuDateAdminController::class);
+    Route::resource('/restaurantAdmin', restaurantAdminController::class);
 
-
-
-Route::get('/orderdetailAdmin', function () {
-    return view('orderdetailAdmin');
-})->name('orderdetailAdmin.show');
-
-
-
-Route::get('/orderstatusAdmin', function () {
-    return view('userlist');
-})->name('userlist.show');
-
-
-Route::resource('/userlist', userListController::class);
-
-Route::resource('/menuAdmin', menuAdminController::class);
-
-Route::resource("/orderstatusAdmin", orderUserAdminController::class);
-
-Route::resource('/orderdetailAdmin', orderDetailAdminController::class);
-
-Route::resource('/menuDateAdmin', menuDateAdminController::class);
-
-Route::resource('/restaurantAdmin', restaurantAdminController::class);
-
-Route::patch('/orders/{id}/toggle-payment', [orderUserAdminController::class, 'togglePaymentStatus'])->name('orders.togglePayment');
-
-Route::patch('/order-details/{id}/update-status', [orderDetailAdminController::class, 'updateStatus'])->name('orderDetails.updateStatus');
+    Route::patch('/orders/{id}/toggle-payment', [orderUserAdminController::class, 'togglePaymentStatus'])->name('orders.togglePayment');
+    Route::patch('/order-details/{id}/update-status', [orderDetailAdminController::class, 'updateStatus'])->name('orderDetails.updateStatus');
+});
