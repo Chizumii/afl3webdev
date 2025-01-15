@@ -137,3 +137,5 @@ Route::resource('/menuDateAdmin', menuDateAdminController::class);
 Route::resource('/restaurantAdmin', restaurantAdminController::class);
 
 Route::patch('/orders/{id}/toggle-payment', [orderUserAdminController::class, 'togglePaymentStatus'])->name('orders.togglePayment');
+
+Route::patch('/order-details/{id}/update-status', [orderDetailAdminController::class, 'updateStatus'])->name('orderDetails.updateStatus');

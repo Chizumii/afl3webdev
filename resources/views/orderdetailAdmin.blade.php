@@ -30,9 +30,6 @@
                     <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider">
                         Delivery Status
                     </th>
-                    <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider">
-                        Action
-                    </th>
                 </tr>
             </thead>
             <tbody class="bg-white divide-y divide-gray-200">
@@ -48,13 +45,21 @@
                     <td class="px-6 py-4 text-sm text-gray-800">
                         {{ $detail->unit ?? 'N/A' }}
                     </td>
-                    <td class="px-6 py-4 text-sm text-gray-800">
-                       {{ $detail->deliveryStatuses->status_name ?? 'N/A' }}
-                    </td>
-                     <td class="flex justify-end px-6 py-4 text-sm text-gray-800">
-                        <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
-                        <span class="mx-3">|</span>
-                        <a href="#" class="text-indigo-600 hover:text-indigo-900">Delete</a>
+                    <td class="flex justify-end px-6 py-4 text-sm text-gray-800">
+                        <form action="{{ route('orderDetails.updateStatus', $detail->id) }}" method="POST">
+                            @csrf
+                            @method('PATCH')
+                            <select name="delivery_status_id" class="border rounded-md px-2 py-1 text-sm text-gray-800">
+                                @foreach ($deliveryStatuses as $status)
+                                    <option value="{{ $status->id }}" {{ $detail->delivery_status_id == $status->id ? 'selected' : '' }}>
+                                        {{ $status->status_name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            <button type="submit" class="ml-2 text-white bg-blue-500 hover:bg-blue-600 px-4 py-2 rounded-md">
+                                Update
+                            </button>
+                        </form>                        
                     </td>
                 </tr>
                 @empty
