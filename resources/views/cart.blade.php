@@ -25,12 +25,12 @@
                             </div>
 
                             <div class="flex items-center gap-2">
-                                <input type="text" value="{{ $item['quantity'] }}" 
-                                    oninput="this.value = this.value.replace(/[^0-9]/g, '');" 
+                                <input type="text" value="{{ $item['quantity'] }}"
+                                    oninput="this.value = this.value.replace(/[^0-9]/g, '');"
                                     onchange="updateItemQuantity({{ $item['id'] }}, this.value)"
                                     class="w-16 text-center bg-transparent text-[#A07658] border border-[#E2CEB1]  focus:outline-none text-sm p-1">
                             </div>
-                            
+
 
                             <!-- Price -->
                             <div class="text-right min-w-[100px]">
@@ -67,11 +67,13 @@
                         id="total-items">{{ session('cart') ? collect(session('cart'))->sum('quantity') : 0 }}</span>
                 </div>
 
-                <a href="/orderstatus" onclick="confirmPayment()"
-                    class="bg-[#ebc892] text-black px-8 py-2 rounded-full font-normal hover:bg-[#d4b788] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                    {{ session('cart') && count(session('cart')) > 0 ? '' : 'disabled' }}>
-                    Confirm Payment
-                </a>
+                <a href="#" onclick="confirmPayment()"
+   class="bg-[#ebc892] text-black px-8 py-2 rounded-full font-normal hover:bg-[#d4b788] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+   {{ session('cart') && count(session('cart')) > 0 ? '' : 'disabled' }}>
+    Confirm Payment
+</a>
+
+
 
                 <div class="text-lg text-[#A07658] font-normal">
                     Total: <span id="total-price">Rp
@@ -80,7 +82,7 @@
             </div>
         </div>
     </footer>
-
+    <!--untuk update cart ketika add to cart dari menu-->
     <script>
         function updateCartDisplay(cart) {
             const cartItemsContainer = document.getElementById('cart-items');
@@ -151,7 +153,10 @@
                 }
             }
         }
+    </script>
 
+    <!--untuk update item quantity cart ketika add to cart dari menu-->
+    <script>
         function updateItemQuantity(id, quantity) {
             fetch('{{ route('cart.update') }}', {
                     method: 'POST',
@@ -172,7 +177,10 @@
                 })
                 .catch(error => console.error('Error:', error));
         }
+    </script>
 
+    <!--untuk remove item dari cart-->
+    <script>
         function removeItem(id) {
             fetch('{{ route('cart.remove') }}', {
                     method: 'POST',
@@ -192,7 +200,8 @@
                 })
                 .catch(error => console.error('Error:', error));
         }
-
+    </script>
+    <script>
         function confirmPayment() {
             // Add your payment confirmation logic here
             console.log('Processing payment...');
