@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class orderDetail extends Model
 {
     use HasFactory;
+
     protected $fillable = [
         'price',
         'unit',
@@ -24,9 +25,9 @@ class orderDetail extends Model
 
     // penghubung relation database
     public function menuDates()
-{
-    return $this->belongsTo(MenuDate::class, 'menu_date_id');
-}
+    {
+        return $this->belongsTo(MenuDate::class, 'menu_date_id');
+    }
 
 
     public function deliveryStatuses(): BelongsTo
@@ -34,10 +35,9 @@ class orderDetail extends Model
         return $this->belongsTo(deliveryStatus::class, 'delivery_status_id');
     }
 
-     // Relasi ke OrderUser
-     public function orderUser(): BelongsTo
-     {
-         return $this->belongsTo(OrderUser::class, 'order_user_id');
-     }
-    
+    // Relasi ke OrderUser
+    public function orderUser(): BelongsTo
+    {
+        return $this->belongsTo(OrderUser::class, 'order_user_id');
+    }
 }

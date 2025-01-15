@@ -38,5 +38,4 @@ class orderUser extends Model
     {
         return $this->hasMany(orderDetail::class, 'orderUser_id');
     }
-    
 }
