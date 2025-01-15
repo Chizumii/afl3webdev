@@ -34,9 +34,10 @@ class orderDetail extends Model
         return $this->belongsTo(deliveryStatus::class, 'delivery_status_id');
     }
 
-    public function orderUsers(): BelongsTo
-    {
-        return $this->belongsTo(orderUser::class, 'order_user_id');
-    }
+     // Relasi ke OrderUser
+     public function orderUser(): BelongsTo
+     {
+         return $this->belongsTo(OrderUser::class, 'order_user_id');
+     }
     
 }

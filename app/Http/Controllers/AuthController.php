@@ -46,23 +46,21 @@ class AuthController extends Controller
             'password' => 'required|string',
         ]);
 
-        if ($request['username'] === 'admin' && $request['password'] === 'admin') {
-            // Arahkan ke halaman admin
+       
+        if ($request->username === 'admin' && $request->password === 'admin') {
+            Auth::loginUsingId(1); 
             return redirect()->route('admin.dashboard');
         }
 
-        // Cek kredensial
         if (Auth::attempt(['username' => $request->username, 'password' => $request->password])) {
-            // Login berhasil, arahkan ke halaman home
             return redirect()->route('home');
         }
 
-        // Jika gagal login
         return back()->withErrors([
             'username' => 'Username atau password salah.',
-            "pagetitle" => "Login"
         ]);
     }
+
 
     // Logout
     public function logout(Request $request)

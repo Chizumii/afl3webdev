@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('menus', function (Blueprint $table) {
             $table->id();
             $table->foreignId('resto_id')->constrained('restos')->onDelete('cascade');
-            $table->string('menu_name');
+            $table->string('menu_name')->nullable(false);;
             $table->text('description');
             $table->decimal('price');
-            $table->string('image');
+            $table->string('image')->nullable(false);;
             $table->timestamps();
         });
     }
