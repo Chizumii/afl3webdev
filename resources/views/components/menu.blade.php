@@ -34,26 +34,26 @@
 
         <!-- Enhanced Menu Grid -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            @if ($menus->isEmpty())
+            @if ($menuDates->isEmpty())
                 <div class="col-span-full text-center py-12">
                     <div class="bg-[#FDF8F3] rounded-lg p-8">
                         <p class="text-xl text-gray-600">No menu items available for the selected date.</p>
                     </div>
                 </div>
             @else
-                @foreach ($menus as $menu)
+                @foreach ($menuDates as $menuDate)
                     <div class="group bg-white rounded-xl border-2 border-[#E2CEB1] p-4 transition-all duration-300"
                         style="animation: fadeIn 0.5s ease-out {{ $loop->index * 0.1 }}s both;">
                         <!-- Enhanced Carousel -->
-                        <div id="carousel-{{ $menu->id }}" class="relative rounded-lg overflow-hidden mb-4">
+                        <div id="carousel-{{ $menuDate->id }}" class="relative rounded-lg overflow-hidden mb-4">
                             <div class="slides flex transition-transform duration-500 h-[250px]"
                                 style="transform: translateX(0);">
                                 @php
-                                    $images = explode(',', $menu->image);
+                                    $images = explode(',', $menuDate->image);
                                 @endphp
                                 @foreach ($images as $image)
                                     <div class="flex-shrink-0 w-full">
-                                        <img src="{{ asset(trim($image)) }}" alt="{{ $menu->menu_name }}"
+                                        <img src="{{ asset(trim($image)) }}" alt="{{ $menuDate->menus->menu_name }}"
                                             class="w-full h-[250px] object-cover transition-transform duration-300 group-hover:scale-105">
                                     </div>
                                 @endforeach
@@ -61,12 +61,12 @@
                             <!-- Enhanced Navigation Buttons -->
                             <button
                                 class="absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 text-white w-8 h-8 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
-                                onclick="moveSlide('{{ $menu->id }}', -1, event)">
+                                onclick="moveSlide('{{ $menuDate->id }}', -1, event)">
                                 &#10094;
                             </button>
                             <button
                                 class="absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 text-white w-8 h-8 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
-                                onclick="moveSlide('{{ $menu->id }}', 1, event)">
+                                onclick="moveSlide('{{ $menuDate->id }}', 1, event)">
                                 &#10095;
                             </button>
                         </div>
@@ -75,13 +75,13 @@
                         <div class="space-y-3">
                             <div class="flex items-center gap-2">
                                 <span class="px-3 py-1 bg-[#FDF8F3] text-sm rounded-full text-gray-600">
-                                    {{ $menu->restos->resto_name ?? 'Unknown Name' }}
+                                    {{ $menuDate->restos->resto_name ?? 'Unknown Name' }}
                                 </span>
                             </div>
 
-                            <h3 class="text-xl font-semibold text-gray-800">{{ $menu->menu_name }}</h3>
+                            <h3 class="text-xl font-semibold text-gray-800">{{ $menuDate->menus->menu_name }}</h3>
 
-                            <p class="text-gray-600 text-sm line-clamp-2">{{ $menu->description }}</p>
+                            <p class="text-gray-600 text-sm line-clamp-2">{{ $menuDate->menus->description }}</p>
 
                             <div class="flex items-center justify-between pt-2">
                                 <span class="text-xl font-bold text-gray-900">
@@ -90,7 +90,7 @@
                             </div>
 
                             <button
-                                onclick="addToCart({{ $menu->id }}, '{{ $menu->menu_name }}', {{ $menu->price }}, '{{ $menu->image }}', {{ $menu->menuDates->first()->id ?? 'null' }})"
+                                onclick="addToCart({{ $menuDate->id }}, '{{ $menuDate->->menus->menu_name }}', {{ $menuDate->menus->price }}, '{{ $menuDate->menus->image }}', {{ $menuDate->menus->menuDates->first()->id ?? 'null' }})"
                                 class="w-full bg-[#b9945d] text-white py-3 rounded-lg hover:bg-[#8d642b] transition-all duration-300 flex items-center justify-center gap-2 mt-4">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
                                     viewBox="0 0 24 24" stroke="currentColor">
