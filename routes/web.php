@@ -20,21 +20,23 @@ use App\Http\Controllers\userListController;
 use App\Models\orderUser;
 
 Route::get('/', function () {
-    return view('home',[
+    return view('home', [
         "pagetitle" => "KATERINGKU"
     ]);
 });
 Route::get('/signup', function () {
-    return view('signup',[
+    return view('signup', [
         "pagetitle" => "signup"
     ]);
 });
 
 
-Route::get('/cart', function () {return view('cart');})->name('cart.index');
+Route::get('/cart', function () {
+    return view('cart');
+})->name('cart.index');
 
 
-Route::get('/restaurants', [restaurantController::class,'showRestaurants'])->name('restaurant');
+Route::get('/restaurants', [restaurantController::class, 'showRestaurants'])->name('restaurant');
 Route::get('/restaurants/{id}', [RestaurantController::class, 'find'])->name('restaurants.show');
 
 Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register.form');
@@ -44,8 +46,8 @@ Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login.form
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 
 Route::get('/home', function () {
-    return view('home'); 
-})->name('home')->middleware('auth'); 
+    return view('home');
+})->name('home')->middleware('auth');
 
 Route::post('/orderstatus', [OrderController::class, 'confirmPayment'])->name('confirmPayment');
 Route::post('/cart/remove', [OrderController::class, 'removeCartItem'])->name('cart.remove');
@@ -69,7 +71,7 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::middleware('auth')->group(function () {
     // Menampilkan form untuk mengedit profil
     Route::get('/profile/edit', [AuthController::class, 'showEditForm'])->name('profile.edit');
-    
+
     // Memperbarui profil user
     Route::post('/profile/update', [AuthController::class, 'updateProfile'])->name('profile.update');
 });
@@ -79,10 +81,10 @@ Route::middleware('auth')->group(function () {
 Route::middleware('auth')->group(function () {
     // Rute untuk menambah item ke keranjang
     Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
-    
+
     // Rute untuk memperbarui quantity item di keranjang
     Route::post('/cart/update', [CartController::class, 'update'])->name('cart.update');
-    
+
     // Rute untuk menghapus item dari keranjang
     Route::post('/cart/remove', [CartController::class, 'remove'])->name('cart.remove');
 });
