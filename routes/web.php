@@ -8,6 +8,7 @@ use App\Http\Controllers\fusionsController;
 use App\Http\Controllers\menuAdminController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\menuDateAdminController;
+use App\Http\Controllers\MenuDateController;
 use App\Http\Controllers\orderController;
 use App\Http\Controllers\orderDetailAdminController;
 use App\Http\Controllers\orderUserAdmin;
@@ -36,8 +37,10 @@ Route::get('/cart', function () {
 })->name('cart.index');
 
 
-Route::get('/restaurants', [restaurantController::class, 'showRestaurants'])->name('restaurant');
-Route::get('/restaurants/{id}', [RestaurantController::class, 'find'])->name('restaurants.show');
+Route::resource('/restaurants', MenuDateController::class);
+Route::get('/menus', [MenuDateController::class, 'index'])->name('menuDate.index');
+
+
 
 Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register.form');
 Route::post('/register', [AuthController::class, 'register'])->name('register');
