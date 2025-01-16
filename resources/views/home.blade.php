@@ -1,11 +1,12 @@
 <x-layout>
     <x-navigation></x-navigation>
     
-    <div class="carousel relative container mx-auto" style="max-width:1600px;">
+    <div class="carousel relative w-full">
         <div class="carousel-inner relative overflow-hidden w-full">
             <!--Slide 1-->
             <input class="carousel-open" type="radio" id="carousel-1" name="carousel" aria-hidden="true" hidden="" checked="checked">
-            <div class="carousel-item absolute opacity-0 transition-opacity duration-300 w-screen h-screen">                <div class="block h-full w-full mx-auto flex items-center bg-cover bg-right"
+            <div class="carousel-item absolute opacity-0 transition-opacity duration-300 w-screen h-screen">                
+                <div class="block h-full w-full mx-auto flex items-center bg-cover bg-right"
                     style="background-image: url('{{ asset('images/maknaan.png') }}');">
                     <div class="container mx-auto px-4">
                         <div class="flex flex-col w-full lg:w-1/2 md:ml-16 items-center md:items-start">
