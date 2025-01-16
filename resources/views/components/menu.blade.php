@@ -144,7 +144,7 @@
         .then(response => {
             console.log('Response received:', response);
             if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
+                throw new Error(HTTP error! status: ${response.status});
             }
             return response.json();
         })
@@ -167,7 +167,7 @@
 
     function moveSlide(menuId, direction, event) {
         event.preventDefault();
-        const carousel = document.querySelector(`#carousel-${menuId} .slides`);
+        const carousel = document.querySelector(#carousel-${menuId} .slides);
         const slideWidth = carousel.offsetWidth;
         const currentTransform = parseInt(getComputedStyle(carousel).transform.split(',')[4] || 0);
         const maxTransform = -(slideWidth * (carousel.children.length - 1));
@@ -176,6 +176,6 @@
         if (newTransform > 0) newTransform = 0;
         if (newTransform < maxTransform) newTransform = maxTransform;
 
-        carousel.style.transform = `translateX(${newTransform}px)`;
+        carousel.style.transform = translateX(${newTransform}px);
     }
 </script>
