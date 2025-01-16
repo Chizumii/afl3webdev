@@ -83,10 +83,10 @@ class OrderController extends Controller
 
     public function orderStatus($order_id)
     {
-        // Ambil data order dari tabel orderUser
+        // Ambil data order dari tabel `orderUser`
         $order = orderUser::table('orderUser')->where('id', $order_id)->first();
 
-        // Ambil data detail order dari tabel orderDetail
+        // Ambil data detail order dari tabel `orderDetail`
         $orderDetails = orderUser::table('orderDetail')
             ->join('menuDate', 'orderDetail.menuDate_id', '=', 'menuDate.id')
             ->where('orderDetail.orderUser_id', $order_id)
