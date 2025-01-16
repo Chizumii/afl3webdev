@@ -15,9 +15,9 @@ class orderUser extends Model
     protected $table = 'order_users';
     protected $fillable = [
         'user_id',
-        'totalPrice',
+        'total_price',
         'date',
-        'isPaymentStatus',
+        'is_payment_status',
     ];
 
     public static function getAllOrderUser()

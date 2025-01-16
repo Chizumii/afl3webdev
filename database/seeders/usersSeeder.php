@@ -27,6 +27,6 @@ class UsersSeeder extends Seeder
             'password' => Hash::make('admin') // Ganti dengan password yang diinginkan
         ]);
 
-        User::factory(99)->create();
+        // User::factory(99)->create();
     }
 }

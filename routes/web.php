@@ -52,11 +52,19 @@ Route::get('/home', function () {
     return view('home');
 })->name('home')->middleware('auth');
 
-Route::post('/orderstatus', [OrderController::class, 'confirmPayment'])->name('confirmPayment');
+Route::post('/confirm-payment', [OrderController::class, 'confirmPayment'])
+    ->name('confirm.payment')
+    ->middleware('auth');
+
+// Route for removing cart items (POST request)
 Route::post('/cart/remove', [OrderController::class, 'removeCartItem'])->name('cart.remove');
+
+// Route for displaying the order status (GET request)
 Route::get('/orderstatus', [OrderController::class, 'showOrders'])->name('orderstatus');
+
+// Route for displaying a specific order's status (GET request with order ID)
 Route::get('/order-status/{order_id}', [OrderController::class, 'orderStatus'])->name('order.status');
-Route::post('/confirm-payment', [OrderController::class, 'confirmPayment'])->name('confirm.payment');
+
 
 
 
@@ -127,6 +135,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/orderstatusAdmin', function () {
         return view('userlist');
     })->name('userlist.show');
+    Route::patch('/order-details/{id}/quantity', [OrderDetailAdminController::class, 'updateQuantity'])
+    ->name('orderDetails.updateQuantity');
 
     Route::resource('/userlist', userListController::class);
     Route::resource('/menuAdmin', menuAdminController::class);

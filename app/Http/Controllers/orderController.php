@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\deliveryStatus;
 use App\Models\OrderDetail;
 use App\Models\orderUser;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -13,28 +15,31 @@ class OrderController extends Controller
 {
     public function showOrders()
     {
-        $orders = session()->get('orders', []);
+        $userID = Auth::id();
 
-        $orderDetails = collect($orders)->map(function ($order) {
-            return [
-                'orderID' => uniqid(),
-                'paymentStatus' => true,
-                'deliveryStatus' => 'Pending',
-                'date' => $order['date'],
-                'unit' => collect($order['items'])->sum('quantity'),
-                'price' => $order['totalPrice'] / collect($order['items'])->sum('quantity'),
-                'totalPrice' => $order['totalPrice'],
-                'items' => collect($order['items'])->map(function ($item) {
-                    return [
-                        'name' => $item['name'],
-                        'quantity' => $item['quantity'],
-                        'price' => $item['price']
-                    ];
-                })->values()->all()
-            ];
+        $orderUsers = orderUser::where('user_id', $userID)
+            ->get(['id', 'total_price', 'is_payment_status']);
+
+        $orderDetails = OrderDetail::whereIn('order_user_id', $orderUsers->pluck('id')->toArray())
+            ->get();
+
+        $deliveryStatuses = DeliveryStatus::all()->keyBy('id');
+
+        $orderDetails->transform(function ($orderDetail) use ($deliveryStatuses) {
+            if (isset($deliveryStatuses[$orderDetail->delivery_status_id])) {
+                $orderDetail->delivery_status_name = $deliveryStatuses[$orderDetail->delivery_status_id]->status_name;
+            }
+            return $orderDetail;
         });
 
-        return view('orderstatus', compact('orderDetails'));
+        $groupedOrderDetails = $orderDetails->groupBy('order_user_id');
+
+        $finalOrders = $orderUsers->map(function ($orderUser) use ($groupedOrderDetails) {
+            $orderUser->orderDetails = $groupedOrderDetails[$orderUser->id] ?? [];
+            return $orderUser;
+        });
+
+        return view('orderstatus', compact('finalOrders'));
     }
 
     public function showCart()
@@ -96,47 +101,68 @@ class OrderController extends Controller
         return view('order_status', compact('order', 'orderDetails'));
     }
 
-    public function confirmPayment(Request $request)
-    {
-        try {
-            $cart = session()->get('cart', []);
 
-            if (empty($cart)) {
+    public function confirmPayment()
+    {
+        // Get cart items from session
+        $cart = session()->get('cart', []);
+
+        // Check if cart is empty
+        if (empty($cart)) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Cart is empty',
+            ], 400);
+        }
+
+        try {
+            // Calculate total price from cart items
+            $totalPrice = collect($cart)->sum(function ($item) {
+                return $item['price'] * $item['quantity'];
+            });
+
+            // Create new order
+            try {
+                $order = OrderUser::create([
+                    'user_id' => Auth::id(),
+                    'total_price' => $totalPrice,
+                    'date' => now(),
+                    'is_payment_status' => false, // Set initial payment status as unpaid
+                ]);
+            } catch (\Exception $e) {
+                Log::error('Order creation failed: ' . $e->getMessage());
+
                 return response()->json([
                     'success' => false,
-                    'message' => 'Your cart is empty.'
-                ], 400);
+                    'message' => 'Failed to create order. Please try again.' + $e,
+                ], 500);
             }
 
-            // Create order data structure
-            $order = [
-                'items' => $cart,
-                'totalPrice' => collect($cart)->sum(fn($item) => $item['price'] * $item['quantity']),
-                'date' => now()->format('Y-m-d H:i:s'),
-                'status' => 'pending'
-            ];
+            // Create order details for each cart item
+            foreach ($cart as $item) {
+                OrderDetail::create([
+                    'order_user_id' => $order->id,
+                    'name' => $item['name'],
+                    'price' => $item['price'],
+                    'unit' => $item['quantity'],
+                    'delivery_status_id' => 2, // Set initial delivery status
+                ]);
+            }
 
-            // Get existing orders or initialize empty array
-            $orders = session()->get('orders', []);
-
-            // Add new order to orders array
-            $orders[] = $order;
-
-            // Store in session
-            session()->put('orders', $orders);
-
-            // Clear the cart
+            // Clear the cart after successful order creation
             session()->forget('cart');
 
             return response()->json([
                 'success' => true,
-                'message' => 'Order confirmed successfully!',
+                'message' => 'Order placed successfully!',
                 'redirect' => route('orderstatus')
             ]);
         } catch (\Exception $e) {
+            Log::error('Order creation failed: ' . $e->getMessage());
+
             return response()->json([
                 'success' => false,
-                'message' => 'Error processing your order. Please try again.'
+                'message' => 'Failed to process order. Please try again.' . $e->getMessage(),
             ], 500);
         }
     }

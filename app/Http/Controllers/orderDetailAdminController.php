@@ -10,10 +10,19 @@ class orderDetailAdminController extends Controller
 {
     public function index()
     {
-        $orderDetails = OrderDetail::with(['orderUser', 'deliveryStatuses'])->get(); // Pastikan relasi 'deliveryStatuses' sudah ada
-        $deliveryStatuses = deliveryStatus::all(); // Ambil semua data delivery statuses
+        $orderDetails = OrderDetail::with([
+            'orderUser.users',
+            'deliveryStatuses',
+            'menuDates.menus'
+        ])->get();
+
+        // Group orders by order_user_id for better organization
+        $groupedOrders = $orderDetails->groupBy('order_user_id');
+        
+        $deliveryStatuses = deliveryStatus::all();
     
-        return view('orderdetailAdmin', compact('orderDetails', 'deliveryStatuses'));
+        return view('orderdetailAdmin', compact('groupedOrders', 'deliveryStatuses'));
+   
     }
 
     public function updateStatus(Request $request, $id)

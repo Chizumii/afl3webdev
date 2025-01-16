@@ -13,9 +13,18 @@ class deliverySeeder extends Seeder
      */
     public function run(): void
     {
-        deliveryStatus::create([
-            'status_name' => 'Delivered',
-        ]);
-        deliveryStatus::factory(1)->create();
+        $deliveryStatus = [
+            'status_name' => 'Pending',
+                'Delivered',
+                'Canceled',
+                'Accepted',
+                'Rejected',
+                'On Delivery'
+        ];
+        foreach ($deliveryStatus as $deliveryStatus) {
+            deliveryStatus::create([
+                'status_name' => $deliveryStatus
+            ]);
+        }
     }
 }

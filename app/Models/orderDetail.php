@@ -13,9 +13,9 @@ class orderDetail extends Model
     protected $fillable = [
         'price',
         'unit',
-        'menuDate_id',
-        'deliveryStat_id',
-        'orderUser_id',
+        'name',
+        'delivery_status_id',
+        'order_user_id',
     ];
 
     public static function getAllOrderDetail()
@@ -40,4 +40,5 @@ class orderDetail extends Model
     {
         return $this->belongsTo(OrderUser::class, 'order_user_id');
     }
+    
 }

@@ -17,7 +17,14 @@ class deliveryStatusFactory extends Factory
     public function definition(): array
     {
         return [
-            'status_name' => $this->faker->randomElement(['Pending','Delivered','Canceled', 'Accepted','Rejected', 'On Delivery']),
+            'status_name' => [
+                'Pending',
+                'Delivered',
+                'Canceled',
+                'Accepted',
+                'Rejected',
+                'On Delivery'
+            ]
         ];
     }
 }
