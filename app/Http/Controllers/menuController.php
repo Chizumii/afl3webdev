@@ -7,31 +7,19 @@ use Illuminate\Http\Request;
 
 class MenuController extends Controller
 {
+
     public function index(Request $request)
-{
-    $selectedDate = $request->input('selected_date', now()->format('Y-m-d'));
+    {
+         $menus = Menu::with('restos')->get();
 
-    $menus = Menu::with(['restos', 'menuDates' => function($query) use ($selectedDate) {
-        $query->where('date', $selectedDate);
-    }])
-    ->whereHas('menuDates', function ($query) use ($selectedDate) {
-        $query->where('date', $selectedDate);
-    })
-    ->get();
-
-    return view('restaurants', compact('menus', 'selectedDate'));
-}
+        // Kirimkan ke view dengan variabel `menus`
+        return view('restaurants', ['menus' => $menus]);
+    }
 
     public function create(Request $request)
     {
         return view('cart');
     }
 
-    public function store(Request $request){
-        
-    }
-    
-    
-    
-
+    public function store(Request $request) {}
 }
