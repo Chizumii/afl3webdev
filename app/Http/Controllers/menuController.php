@@ -21,5 +21,11 @@ class MenuController extends Controller
         return view('cart');
     }
 
-    public function store(Request $request) {}
+    public function store(Request $request){
+        
+    }
+    
+    
+    
+
 }
